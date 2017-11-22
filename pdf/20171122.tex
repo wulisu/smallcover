@@ -1,0 +1,864 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amssymb,amsmath,amscd} 
+\usepackage{bm} 
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{overpic}
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{esvect}
+\usepackage{diagm}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage[amsmath,thmmarks]{ntheorem}
+
+\theoremstyle{plain}% default
+\newtheorem{thm}{定理}[section]
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{cor}{推论}
+
+\theoremstyle{definition}
+\theorembodyfont{\normalfont}
+\newtheorem{defn}{定义}
+\newtheorem{exmp}{例}
+\newtheorem{xca}[exmp]{Exercise}
+\theoremstyle{remark}
+\newtheorem*{rem}{注}
+\newtheorem*{conj}{Borel conjecture}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\title{Fundamental Groups of Small Covers}
+\date{}
+\begin{document}
+\maketitle
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Small Cover}
+%polytope-----------~~~~~~~~~~~
+{\em 凸多面体$P$}是指$\mathbb{R}^n$中非空有限多个点集的凸包，或者等价的是$\mathbb{R}^n$中有限个半空间的有界交，
+即
+$$P=conv\{p_1,p_2,\cdots,p_{\ell}\}=\{x\in \mathbb{R}^n :\langle l_i,x\rangle\geq -a_i,i=1,2,\cdots,m\}$$
+其中$l_i$为$(\mathbb{R}^n)^*$中的线性函数，$a_i\in \mathbb{R}$.
+
+凸多面体的{\em 维数}就是指凸包或者有界交的维数。若无特殊说明，本文中的所考虑的多面体均指$\mathbb{R}^n$中的$n$维凸多面体，记为$P$. 我们把$P$的边界记为$K$. 把$P$的内部记为$P^{\circ}$. 凸子集$F\subset P$称为$P$的{\em 面}，若$F$是多面体$P$与某一个半空间$V=\{x\in \mathbb{R}^n :\langle l,x\rangle\geq -a\}$的交，且$P^{\circ}\cap \partial V =\varnothing$.子集$\varnothing$和$P$本身都为$P$的面，称为{\em 平凡面}；其他的面称为{\em 真面}. $P$的$0$维面称为$P$的{\em 顶点}，$P$的$1$维面称为$P$的{\em 边}，$P$的$n-1$维面称为$P$的{\em facet}. 记$f_i$为$P$的$i$维面的个数，称$\mathbf{f}(P)=(f_0,f_1,\cdots,f_{n-1})$为$P$的{\em $f$-vector}. 取$f_{-1}=1$，则$P$的{\em $h$-vector} $\mathbf{h}(P)=(h_0,h_1,\cdots,h_n)$由下面等式定义
+$$h_0 t^n+\cdots+h_{n-1}t+h_n=(t-1)^n+f_0(t-1)^{n-1}+\cdots+f_{n-1}$$
+由Dehn-Sommerville 关系知$h_i=h_{n-i},i=0,1,\cdots,n$，为方便我们在本文中将$P$的facets的个数记为$f_{n-1}=m$，即$P$的facets集为$\mathcal{F}(P)=\{F_1,F_2,\cdots,F_m\}$.
+
+我们称多面体$P$是{\em 单}（simple）的，若$P$的每个顶点恰好是$P$中$n$个facets的交，等价地，每个顶点处恰好有$n$条边.单多面体中任意余维数为$k$的面$f$总可以(唯一)表示为$f=F_1\cap F_2 \cap \cdots \cap F_k$，其中$F_1,F_2,\cdots,F_k$为包含$f$的facets.
+%small cover------------
+
+
+取$\mathbb{Z}_2=\{1,-1\}$为二元乘法群或者模空间，$\mathbb{Z}_2^n$表示它们的乘积，$e_i$表示$\mathbb{Z}_2^n$第$i$个标准向量. 
+设$P$为$n$维单凸多面体，$\mathcal{F}(P)$为$P$的facets集，对每一个 facet $F_i\in \mathcal{F}(P)$，我们定义它上面的一个染色$\lambda(F_i)\in \mathbb{Z}_2^n$，使得对$P$的每一个顶点$p=F_1\cap F_2 \cap \cdots \cap F_n$，满足$span\{\lambda(F_1),\lambda(F_2),\cdots,\lambda(F_n)\}\cong \mathbb{Z}_2^n$. 我们称$\lambda:\mathcal{F}(P)\longrightarrow \mathbb{Z}_2^n$为下面将要构造的small cover $M$的示性函数. 
+%需要注意的是，下文出现的多面体指数之间的乘法，均默认为群$\mathbb{Z}_2^n$中的乘法运算. 
+
+{\rem 对于任意单凸多面体，满足上面条件的染色不一定存在，参考 Davis-Januszkiewicz \cite{DJ1}. 
+{\em Nonexample 1.22（Duals of cyclic ploytope）}}
+
+现在我们定义单凸多面体$P$上的small cover. 对任意点$x\in P$，记$f(x)$为$P$中包含$x$为相对内点的唯一的面，例如$x$为$P$内部的点时，则$f(x)=P$; $x$为$P$的顶点时，则$f(x)=F_1\cap F_2 \cap \cdots \cap F_n$，其中$\{F_1,F_2,\cdots,F_n\}$为包含点$x$的$n$个facets. 
+不妨设$f(x)=F_1\cap F_2 \cap \cdots \cap F_k$为$P$的任意一个固定的余$k$维面，记$G_{f(x)}=\langle\lambda(F_1),\lambda(F_2),\cdots,\lambda(F_k)\rangle=\langle\lambda(F_i):x\in F_i\rangle$. 则定义{small cover}为
+\begin{equation}\label{eq1}
+M=(P\times\mathbb{Z}^n_2)/\sim
+\end{equation}
+$(x,g)\sim (y,h)$当且仅当$x=y,g^{-1}h\in G_{f(x)}$.这里$G_{f(x)}<\mathbb{Z}_2^n$实际上是点$x$处的{\em isotopy subgroup}，i.e. $\{g\in \mathbb{Z}_2^n :gx=x\}$. 进一步，设$\pi:M\longrightarrow P$为$M$到$P$的投射.
+
+另外，我们也可以比较直观得描述一个small cover. 首先我们将$2^n$个单多面体$P$在$P$的一个顶点处粘在一起. 任取$P$的一个顶点$p_0$，不妨记$p_0$附近的facets 为$F_1,F_2,\cdots,F_n$，且对应facet上的染色为$\lambda(F_i)=e_i,i=1,2,\cdots,n$. 首先我们把$P$放到$\mathbb{R}^n$的第一卦限中，使得$p_0$与原点重合，第$i$个facet $F_i$落在$x_i=0$的坐标面上. 然后我们将$P$沿着坐标面反射，得到$2^n$个$P$组成的大多面体，记为$Q$，其中$p_0$自然的落在$Q$的内部. 我们给第$g$个坐标卦限中的$P$一个自然的标号$g\in\mathbb{Z}_2^n$. 最后我们再将$Q$剩余的facets按照染色信息成对粘合起来，即第$g_1$个$P$的facet ~$F_{i}$与第$g_2$个$P$的facet~$F_{j}$粘，当且仅当$i=j,~g_1^{-1}g_2=\lambda(F_i)$.这样我们就得到$P$上的small cover $M$.
+
+{\prop small cover 为连通闭流形.}\\
+{\bf 证明：}参考Davis-Januszkiewicz \cite{DJ1}.{\em 性质 1.7}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Examples of Small Covers}
+{\exmp
+当$P=\triangle^n$时，$\mathcal{F}(P)$上本质上只有一种染色，如$n=2$时，
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{Tn-1.eps}
+  \put(-330,80){ \Large$e_1$}
+  \put(-265,80){ \Large$e_2$}
+   \put(-300,35){ \Large$e_1e_2$}
+\end{figure}
+先将$P$在一个点处粘，得到一个大的四边形，由染色信息知它的对边沿着箭头方向粘，这是一个$\mathbb{R}P^2$.
+}
+
+{\exmp
+当$P^2$为四边形时，$\mathcal{F}(P)$上有下面两种不同的染色，
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{Sq1.eps}
+   \put(-335,95){ \Large$e_1$}
+  \put(-240,95){ \Large$e_1$}
+    \put(-288,140){ \Large$e_2$}    
+    \put(-288,50){ \Large$e_2$}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{Sq2.eps}
+    \put(-335,95){ \Large$e_1$}
+  \put(-240,95){ \Large$e_1e_2$}
+    \put(-288,140){ \Large$e_2$}    
+    \put(-288,50){ \Large$e_2$}
+\end{figure}
+同样的操作，我们可以分别得到$T^2$和 Klein bottle. 
+}
+
+{\exmp（$P^2$是一个$m$边形时）
+
+$M$是由$4$个 $m$-gon 沿边粘成的曲面，所以$M$的欧拉数为$\chi(M)=4-m$. 当$m$为奇数时，$M$为$m-2$个$\mathbb{R}P^2$的连通和；当$m$为偶数时，$M$为$m-2$个$\mathbb{R}P^2$的连通和或着为$\frac{m-2}{2}$个$T^2$的连通和. 所以small cover 决定了除$S^2$外的所有二维闭曲面.
+}
+
+由Hurewicz 定理知道，胞腔复形的基本群可以由它们的二维骨架确定，所以在本文中，我们将构造small cover 的一种胞腔结构，并利用它的二维骨架来计算基本群. 此外，我们记small cover $M$的$k$维骨架为$M[k]$，记多面体$P$的$k$维面结构为$P[k]$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cell Structure}
+%构造一种实用的胞腔结构
+由于单凸多面体具有很好的组合性质，所以我们可以通过不同的方式来构造Small cover的胞腔结构. 比如由单多面体的面结构诱导的small cover 上的胞腔结构；small cover的perfect 胞腔结构，见Davis-Januszkiewicz \cite{DJ1} Theorem 3.1; 由单多面体的 cubical subdivision 所诱导的胞腔结构，见 Buchstaber \cite{Buch}. 在下面一节中，我们对$Q$作类似 cubical subdivision的操作，来构造small cover 上一种较自然的胞腔分解. 在这种胞腔结构，可以方便的得到$\pi_1(M)$的一个简洁的表示.
+
+对于一般的单凸多面体$P$，总存在它的cubical subdivision，我们将这种分解拉到small cover，我们自然地可以得到small cover 一种胞腔分解. 而$Q$一般来说未必是单的，所以我们下面构造的这种b胞腔分解并不是严格意义的cubical. 进一步，多面体$Q$的面结构诱导的$M$的一个胞腔分解，而我们下面构造的胞腔分解实际上是这种胞腔结构Poincare 意义上的对偶.
+
+%%%%%%%%%%%%%%%%%%%%%%
+%youtu
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Definitions and Constructions}
+%同上面，我们首先将$|\mathbb{Z}_2^n|=2^n$个多面体$P$的copy在$P$的任一顶点$p_0$处粘合，得到一个大的$n$维多面体$Q$，这里$Q$也可以看作将多面体$P$沿着它的一点$p_0$附近的facets作反射得到.
+%，所以对于$M$，局部上$(\mathbb{Z}_2^n不变)$都可由反射构造，染色信息实际上不决定$M$的局部信息.
+
+由$Q$的构造知，$Q$中的每一个$P$自然地拥有一个标号$g\in    \mathbb{Z}_2^n$，我们将第$g$个单多面体$P$记为$P_g$，将$Q$中$P_g$的第$i$个facet $F_i$记为$F_{i,g}$. 若$P_g$的$k$维面 $f^k_i\subset \partial Q$，此时$f^k_i$称为$Q$的{\em 外face}，否则称为$Q$的{\em 内face}，将$Q$的内、外面集分别记为$in(Q),out(Q)$. 
+%接下来把$Q$的外facets按照染色信息配对粘合就可以得到商空间 -- small cover $M$. 
+我们注意到$Q$的所有的facets上存在一种自然的配对结构. 配对的规则由$P$上的染色$\lambda$决定. 这种配对结构有助于我们描述$M$的基本群. 下面，我们引入$M$的面配对结构的定义.
+
+{\defn[\cite{Y1} Facets-pair structure]~ 
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.5\textwidth]{FP1.eps}
+\put(-95,68){ $f$}
+\put(-80,110){ $F_{i_1,g_1}$}
+\put(-55,85){ $F_{i_2,g_1}$}
+\put(-128,110){ $F_{j_1,g_2}$}
+\put(-150,85){ $F_{i_3,g_2}$}
+\put(-128,25){ $F_{i_4,g_3}$}
+\put(-150,50){ $F_{i_3,g_3}$}
+\put(-80,25){ $F_{j_4,g_4}$}
+\put(-55,50){ $F_{j_2,g_4}$}
+\end{figure}
+
+设$X$为一个$n$维连通拓扑空间，$X$可以由有限个$n$维单凸多面体$\{P_g^n:g=1,2,\cdots,N\}$粘合而成，同样我们记$P_g$的第$i$个facet $F_i$为$F_{i,g}$，并且满足下面两个条件：\\
+1、任意facet $F_{i,g_1}$唯一配对$F_{j,g_2}$%(\neq F_{i,g_1})$，
+. 即存在一个同胚$\tau_{i,g_1}:F_{i,g_1}\longrightarrow F_{j,g_2}$与$\tau_{j,g_1}:F_{j,g_2}\longrightarrow F_{i,g_1}$使得$\tau_{i,g_1}=\tau_{j,g_2}^{-1}$. 我们称$\widehat{F}=\{F_{i,g_1},F_{j,g_2}\}$为一个{\em facet对}，称$F_{j,g_2}$为$F_{i,g_1}$的{\em 配对facet}.\\%配对面%
+2、对任意余二维面$f=F_{i_1,g_1}\cap F_{i_2,g_1}$，如果$\tau_{{i_1},{g_1}}(f)=F_{j_1,g_2}\cap F_{j_3,g_2}$，$\tau_{{i_2},{g_1}}(f)=F_{j_2,g_4}\cap F_{j_4,g_4}$，则$\tau_{{j_3},{g_2}}\tau_{{i_1},{g_1}}(f)=\tau_{{j_4},{g_4}}\tau_{{i_2},{g_1}}(f)=F_{i_3,g_3}\cap F_{i_4,g_3}$. 这里不排除$F_{j_2,g_4}=F_{j_3,g_2}$或者$F_{i_2,g_1}=F_{i_3,g_3}$.
+
+则我们称$\mathcal S=\{\widehat{F}_{i,g},\tau_{i,g}\}$为$X$
+%$\{P_l^n\}$
+上的一个{\em facets-pairing structure}，
+$\tau_{i,g}:F_{i,g_1}\longrightarrow F_{j,g_2}$为$\mathcal S$的{\em structure map}. $\hfill{} \Box$
+%记一步，若$X$为闭的，我们称$\mathcal S$是$M$的一个{\em 完全}的 facets-pairing structure}  $\hfill{} \Box$
+%%这里有个图
+
+%%示性函数决定配对结构，配对结构决定smallcover%%
+事实上，$\mathcal{F}(P)$ 上的示性函数$\lambda:\mathcal{F}(P)\longrightarrow \mathbb{Z}_2^n$决定了$M$上的一个配对结构. $F_{i,g_1}\sim F_{j,g_2}$当且仅当$F_i=F_j,~ \lambda(F_i)=(g_1)^{-1}g_2$，
+%反之，若知道$\{P_g^n:g=1,2,\cdots,N\}$上的一个完全配对结构，我们也可以构造出一个闭流形$M$. 
+当且仅当$i=j,~g_2=g_1\cdot \lambda(F_i)$，即对$Q$的任意一个facet $F_{i,g}$，他的配对facet为$F_{i,\phi_i(g)}$，其中$\phi_i(g)=g\cdot\lambda(F_i):\mathbb{Z}_2^n\longrightarrow \mathbb{Z}_2^n$. 下面，我们把$M$的facets pair 记为$\{F_{i,g},F_{i,\phi_i(g)}\}$.
+
+$Q$到$P$有一个自然地投射，我们记为
+\begin{equation}\label{eq2}
+\bar{\pi}:Q\longrightarrow P
+\end{equation}
+
+
+下面构造$M$的cell structure.
+首先我们将$M[0]$取为点$p_0$，并且设为$M$的基点.
+我们在$Q$的每一对余$1$维面处构造$1$-cells.对$Q$的每对facets pair$\{F_{i,g},F_{i,\phi_i(g)}\}$（这里我们仅考虑$Q$的外facets pair），任取$F_{i,g}$，$F_{i,\phi_i(g)}$内部的点$a_{i,g},a_{i,\phi_i(g)}$（不妨取为$F_{i,g}$，$F_{i,\phi_i(g)}$的重心），使得$\bar{\pi}(a_{i,g})=\bar{\pi}(a_{i,\phi_i(g)})=a_i\in P$，在$Q$的内部取连接$p_0$到$a_{i,g},a_{i,\phi_i(g)}$的两条简单有向道路（不妨取为直线段）,记为$\vv{a_{i,g}},\vv{a_{i,\phi_i(g)}}$. 则$\vv{a_{i,g}}(\vv{a_{i,\phi_i(g)}})^{-1}$为$M$中以$p_0$为起点的一条有向闭路，记为$x_{i,g}$，另外记$x_{i,\phi_i(g)}=x_{i,g}^{-1}$，它表示$M$中以$p_0$为起点的有向闭路$\vv{a_{i,\phi_i(g)}}(\vv{a_{i,g}})^{-1}$.若我们不考虑$x_{i,g}$(或 $x_{i,\phi_i(g)}$)的方向，则$x_{i,g}-\{p_0\}\cong e_{i,g}^1$（或$x_{i,\phi_i(g)}-\{p_0\}\cong e_{i,\phi_i(g)}^1$），这里$e^k$表示$M$一个$k$维cell. $M$中的每一对facets pair 都决定了一个$1$-cell. 在上述构造中，所有的$\{x_{i,g}\}$都仅交于点 $p_0$ 处. 这样我们就获得$M$的$1$-skelton $M[1]=e^0\cup(\bigcup\limits_{i,g} e_{i,g}^1)=\bigvee\limits_{p_0} x_{i,g}$. 
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.9\textwidth}
+\input{Cell-2.pdf_tex}
+\end{figure}
+
+我们在$Q$的余$2$维外面处构造$2$-cells. 设$f_1=F_{i,g}\cap F_{j,g}$为$Q$的任意一个余$2$维外面，则令$f_2=F_{i,\phi_i(g)}\cap F_{j,\phi_i(g)}$，$f_3=F_{i,\phi_i\phi_j(g)}\cap F_{j,\phi_i\phi_j(g)}$，$f_4=F_{i,\phi_j(g)}\cap F_{j,\phi_j(g)}$，使得$\{\bar{\pi}(f_k),k=1,2,3,4\}$ 在$P$中的像相同，记为$f$，这里$\phi_i\phi_j(g)=\phi_i(g\cdot \lambda(f_j))=g\cdot \lambda(f_j)\cdot \lambda(f_i)$. 取$f$内部的一个点$b$，对应$f_k$上的点设为$b_k,~k=1,2,3,4$. 取$V_1$为经过点$b_k,p_0,a_{i,g},a_{j,g}$的二维简单区域，如取$b$为$span\{\vv{a_i},\vv{a_j}\}$与 $f$的交点，其中$\vv{a_i}=\bar{\pi}(\vv{a_{i,g}}), \vv{a_j}=\bar{\pi}(\vv{a_{j,g}})$，这里的$span\{\vv{a_i},\vv{a_j}\}\overset{\Delta}{=}\{\vv{x}=k_1\vv{a_i}+k_2\vv{a_j},~k_1,k_2\geq 0\}$. 则$V_1=span\{\vv{a_{i,g}},\vv{a_{j,g}}\}\cap P_g \cong D_{+}^2$. 
+类似确定$V_2=span\{\vv{a_{i,\phi_i(g)}},\vv{a_{j,\phi_i(g)}}\}\cap P_{\phi_i(g)},V_3=span\{\vv{a_{i,\phi_i\phi_j(g)}},\\~\vv{a_{j,\phi_i\phi_j(g)}}\}\cap P_{\phi_i\phi_j(g)},V_4=span\{\vv{a_{i,\phi_j(g)}},\vv{a_{j,\phi_j(g)}}\}\cap P_{\phi_j(g)}$，则$\{V_k:k=1,2,3,4\}$在$M$中实际上粘合成一个闭的$D^2$，记为$D^2_f$，且$D^2_f$的边界落在$M$的$1$-skelton中. 对应的二维cell $e_f^2=(D^2_f)^{\circ}$. 这样就得到$2$-skelton $M[2]=M[1]\cup (\bigcup\limits_{f}e_f^2)$.
+
+依次进行下去，我们可以在$Q$的余$k$维外面$f_l^k=F_{i_1,g}\cap F_{i_2,g}\cap \cdots \cap F_{i_k,g}$处可构造$M$的$k-cells$. 我们可以类似取$V_l=span\{a_{i_1,g}, a_{i_2,g},\cdots, a_{i_k,g}\}\cap P_g, l=1,2,\cdots,2^k$，它们在$M$中粘成一个$k$维闭圆盘，记为$D^k$，则$\partial D^k$落在$M[k-1]$中，且$D^k$对应$M$的$k$-cell 可以为
+\begin{equation*}\label{eq3}
+e^k\cong (D^k)^\circ=\left(\bigcup_{\{l=1,2,\cdots,2^k\}} V_l\right)^{\circ}.
+\end{equation*}
+
+ 最终我们可以在$Q$的顶点处构造$M$的$h_0$个$n-cells$. 容易看出$M[n]=M$. 我们构造的这种的胞腔结构实际上$Q$的面结构决定的胞腔结构的Poincare意义上的对偶胞腔结构，即$Q$的每个余$k$维面与这里的一个$k$维胞腔横截相交. 
+
+{\rem 在上述二维胞腔的构造中，若$ F_{i,g}$包含点$p_0$，则$a_{i,g}$可能包含在$F_{i,g}$中，此时我们构造的$V_i$是一个退化的cube，我们的构造依然适用.  
+
+我们$Q$内面中所有内面横截对应的胞腔构成了以$p_0$为中心同胚于$n$维实心球上的胞腔分解，在$Q$内是可缩的，即特征映射$\Phi:D_f^k\longrightarrow M$，任意$f\in in(Q)$，都与常值映射同伦. 为下面讨论方便，我们不妨设内面对面的胞腔都为点$p_0$.}
+
+%%这种构造具有一般性
+事实上，对于具有facets pair 结构的任意拓扑流形都可类似构造其胞腔结构.如我们考虑
+%%这里有个例子和说明
+{\exmp 我们将三角形沿着他们对应的边粘和得到一个$S^2$
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=\textwidth]{S2.eps}
+\end{figure}
+按照上面步骤，我们可以得到$S^2$的一个胞腔分解$S^2=e_0\cup e^1 \cup e_1^2\cup e_2^2$}
+
+
+%%利用这种胞腔结构计算基本群%%%%%%%%%%%
+\subsection{Calculation and Example}
+%在这种胞腔结构下，我们可以得到$\pi_1(M)$的一个比较简洁的群表示. 下面我们分析$M$的基本群. 
+small cover 的基本群$\pi_1(M)$的生成元可取为facets对应的有向闭路$\{x_{i,g}\}$.  $\pi_1(M)$的关系由二维胞腔及配对关系决定. 
+%已知$F_{i,g_1}\sim F_{i,g_2}$当且仅当$(g_1)^{-1}g_2=\lambda(F_i)$，即$g_2=g_1\cdot \lambda(F_i)=\phi_i(g_1)$，所以
+对$M$中的任意facet pair  $\{F_{i,g},F_{i,\phi_i(g)}\}$对应一对互逆的生成元$x_{i,g}$，$x_{i,\phi_i(g)}$，即配对关系为$x_{i,g}x_{i,\phi_i(g)}=1$.  
+对于任意余二维面$f=F_{i,g}\cap F_{j,g}(\neq \varnothing)\subset Q$
+%（或者等价地$f=F_{i}\cap F_{j}(\neq \varnothing)\subset P$）
+，由$f$确定的二维胞腔$e_f$决定一个关系$r_f=\partial D^2_f=x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_i\phi_j(g)}x_{j,\phi_j(g)}=1$，即$x_{i,g}x_{j,\phi_i(g)}=(x_{i,\phi_i\phi_j(g)}x_{j,\phi_j(g)})^{-1}=(x_{j,\phi_j(g)})^{-1}(x_{i,\phi_i\phi_j(g)})^{-1}=x_{j,g}x_{i,\phi_j(g)}$. 
+%%此处有图
+从而我们得到$\pi_1(M)$的一个群表示.
+%$(P,g)$有个自然的序$l\in \mathbb{Z}^n_2$，我们取基本群生成元为那些$g_1<g_2$的facets 对应的生成元.$Q$中每组余$2$维面对应的$D$确定一个长度为$4$的关系$r(V)=x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_j(g)}^{-1}x_{j,g}^{-1}$.
+%\begin{multline}
+%\pi_1(M)=\langle x_{i,g},i=1,2,\cdots,m,g\in \mathbb{Z}_2^n:\\
+%x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_j(g)}^{-1}x_{j,g}^{-1}=1,\forall f=F_{i,g}\cap F_{j,g}\neq \varnothing\rangle
+%\end{multline}
+%其中$\phi_i(g)=\lambda(F_i)$
+%更进一步，我们将$\{x_{i,g_1}\}$的逆$\{x_{i,g_2}\}$放入基本群的生成系中（或者我们忽略$(P,g)$的序，考虑$Q$的所有facets 对应的生成元），则$r(V)$具有一个漂亮的表达$r(V)=x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_i(g)\phi_j(g)}x_{j,\phi_j(g)}$
+\begin{multline}\label{eq0}
+\pi_1(M)=\langle x_{i,g},i=1,2,\cdots,m,g\in \mathbb{Z}_2^n:x_{i,g}x_{i,\phi_i(g)}=1,\forall i,g;\\
+x_{i,g}x_{j,\phi_i(g)}=x_{j,g}x_{i,\phi_j(g)},\forall f=F_{i,g}\cap F_{j,g}\neq \varnothing\rangle
+\end{multline}
+其中$\phi_i(g)=g\cdot\lambda(F_i)$
+{\rem 这里我们把内facets $\{F_{i,g}:i=1,2,\cdots,n. g\in\mathbb{Z}_2^n\}$对应的点$p_0$也看为闭路，分别记为$x_{i,g}$，内余二维面对应的关系自然也为平凡的.}
+%%%%定性分析%%%%%%%
+
+我们记$\mathcal{F}_1(Q)=\{F_{i,g}:i=1,2,\cdots,n. g\in\mathbb{Z}_2^n\}$为$Q$的内facets集；记$\mathcal{F}_2(Q)$为$Q$的内facets集附近的facets集，即$\mathcal{F}_2(Q)=\{F\in \mathcal{F}(Q)\cap \partial{Q}:\exists G \in\mathcal{F}_1(Q), st.~ F\cap G\neq \varnothing \}$；记$\mathcal{F}_3(Q)$为$Q$外facets集剩余的facets集. 则我们有下面结论.
+{\lem \label{lem3}
+$\forall F_i\in \mathcal{F}(P)$ 固定，则$\bar{\pi}^{-1}(F_i)=\{F_{i,g}:g\in\mathbb{Z}_2^n\}$对应的生成元$\{x_{i,g}:g\in\mathbb{Z}_2^n\}$是彼此相关的. 特别地，当$F_{i,g}\in \mathcal{F}_1(Q)$时，$x_{i,g}=1$； 当$F_{i,g_1}, F_{i,g_2}\in \mathcal{F}_2(Q)$时，若$F_{i,g_1}\cap F_{i,g_2}\neq \varnothing$，则$x_{i,g_1}= x_{i,g_2}$，否则$x_{i,g_1}= (x_{i,g_2})^{-1}$.
+
+进一步，设$f=F_{i,g}\cap F_{j,g}$为$Q$中任意一个固定的余二维面. 当$F_{i,g}$和$F_{j,g}$都属于$\mathcal{F}_1(Q)$，即$f$为内面时，$f$对应的关系为$1$；当$F_{i,g}$和$F_{j,g}$分别属于$\mathcal{F}_2(Q)$和$\mathcal{F}_1(Q)$时，$f$对应的关系为$x_{i,g}=x_{i,\phi_j(g)}$.
+}\\
+{\bf 证明：}
+若$F_{i,g}$为内facets，则$\vv{x_{i,g}}$包含在$Q$的内部，可缩为点道路，故$x_{i,g}=1$. 
+对于内余2维面 $f=F_{i,g}\cap F_{j,g}$确定的关系，为内生成元的组合，故也是平凡的. 
+若$F_{i,g},F_{j,g}$分别为外面和内面，不妨设$F_{i,g}$为外面，$F_{j,g}$为内面，则$x_{j,g}=x_{j,\phi_i(g)}=1$，所以$f$对应的关系为$x_{i,g}=x_{i,\phi_j(g)}$. 即内面附近的且相交为余二维面$f$的facets 对应的生成元是彼此相关的.
+又因为每对facets pair对应的生成元互为逆元，所以当$F_{i,g_1}\cap F_{i,g_2}= \varnothing$时，$x_{i,g_1}= (x_{i,g_2})^{-1}$. 
+
+最后，我们考虑$F_{i,g}\in \mathcal{F}_3(Q)$的情况. 我们不妨固定$F_{i,1}\in \bar{\pi}^{-1}(F_i)$，对应的生成元为$x_{i,1}$. 首先它的配对facets对应的生成元$x_{i,\phi_i(1)}=(x_{i,1})^{-1}$. 
+由于与$F_{i,1}$相交的facets都在$P_{1}$中，所以任意$f=F_{i,1}\cap F_{j,1}\neq \varnothing$对应的关系为$x_{i,1}x_{j,\phi_i(1)}=x_{j,1}x_{i,\phi_j(1)}$，即$x_{i,\phi_j(1)}=x_{i,\lambda(F_j)}=(x_{j,1})^{-1}x_{i,1}x_{j,\phi_i(1)}$.
+然后，我们对$F_{i,\phi_j(1)}$进行上面的讨论. 所以$\forall g \in \langle \phi_i(1),\{\phi_j(1)\}\rangle $， $x_{i,g}$都与$x_{i,1}$相关，其中$j\in \{j:F_j\cap F_i \neq \varnothing\}$. 我们仅考虑$F_i$一个顶点处的染色，我们知$\langle \{\phi_j(1)\}\rangle\cong \mathbb{Z}_2^{n}/\langle\phi_i(1)\rangle$. 所以$\langle \phi_i(1),\{\phi_j(1)\}\rangle \cong \mathbb{Z}_2^{n}$，这就证明了所有的$\{x_{i,g}:g\in \mathbb{Z}_2^{n}\}$是相关的.
+$\hfill{} \Box$
+
+{\rem 1、注意这里不排除$F_{i,g}\cap F_{i,\phi_j(g)}, F_{i,g}\cap F_{i,\phi_i\phi_j(g)}$都为$Q$中非空的余二维面的情况，此时$(x_{i,\phi_j(g)})^{-1}=x_{i,\phi_i\phi_j(g)}=x_{i,g}=x_{i,\phi_j(g)}$，i.e. $(x_{i,\phi_j(g)})^{2}=1$. 从而$\{x_{i,g}:g\in\mathbb{Z}_2^n\}$为$\pi_1(M)$中的相等的二阶生成元. \\
+2、Davis-Januszkiewicz \cite{DJ1} theroem 3.1 中指出small cover Mod 2 Betti 数$b_i(M)=h_i(P)$（这里$h_i$定义中$f_k$表示$P$中余$k+1$维面的个数）. $b_1(M)=h_i(P)=m-n$，即在perfect 意义上的胞腔结构得到基本群生成元个数为$m-n$个. 在这里所有外facets 决定的生成元实际上也是$m-n$个. \\
+%3、我们猜测$\pi_1(M)$中有有限阶元，则阶数为$2$（或$2^k$），当且仅当$P$中有二维面.
+%并且是$\pi_1(M)$最少生成元个数（\ref{lem1}）.
+%此时$P$可以表示为$\Delta^{n_1}\times Y$，其中$2\leq n_1\leq n$，$ Y$为$n-n_1$维单多面体.
+}
+{\bf 猜想：}$P$中存在$\Delta^2$面当且仅当$\pi_1(M)$中有二阶元.（必要性易证）
+%from Hampel 3-manifolds page 170 15.1 可以知道对于三维可定向small cover($RP^3$除外)的基本群都是torsion free infinite的，非可定向small cover 基本群中有限阶元只有2阶。
+进一步推测任意维数的small cover 的基本群中元素为有限阶的，则它的阶数只能是2.
+
+在下面例子中，我们只取每个facets pair中的其中一个facets对应的闭路作为基本群的生成元.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\exmp $P$为五边形时，$\mathcal{F}$上的染色依次取为$\{e_2,e_1e_2,e_1,e_2,e_1\}$，$Q$可视为$12$边形，对应$6$对外facets，$4$组余二维外面。
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.85\textwidth}
+\input{M5-20.pdf_tex}
+\end{figure}
+
+%求$M$的基本群。
+$Q$中的外facets pair 有$\{F_{2,e_1},F_{2,e_2}\}$，$\{F_{1,e_1},F_{1,e_1e_2}\}$，$\{F_{1,1},F_{1,e_2}\}$，$\{F_{2,1},F_{2,e_1e_2}\}$，$\{F_{3,1},F_{3,e_1}\}$，$\{F_{3,e_2},F_{3,e_1e_2}\}$. 
+给所有道路一个指向$p_0$的方向，取$p_0$为基点，取生成元为
+\begin{align*}
+x_{2,e_1}&= \vv{a_{2,e_1}}\cdot(\vv{a_{2,e_2}})^{-1}&
+x_{1,e_1}&= \vv{a_{1,e_1}}\cdot(\vv{a_{1,e_1e_2}})^{-1}&
+x_{1,1}  &= \vv{a_{1,1}}\cdot(\vv{a_{1,e_2}})^{-1}\\
+x_{2,1}  &= \vv{a_{2,1}}\cdot(\vv{a_{2,e_1e_2}})^{-1}&
+x_{3,1}  &=\vv{a_{3,1}}\cdot(\vv{a_{3,e_1}})^{-1}&
+x_{3,e_2}&= \vv{a_{3,e_2}}\cdot(\vv{a_{3,e_1e_2}})^{-1}
+\end{align*}
+在余$2$维面$p_1,p_2,p_3,p_4$处分别确定四组关系：\\
+$x_{1,1}=x_{1,e_1}$;$x_{1,1}x_{2,e_2}=x_{2,1}x_{1,e_1e_2}$，即$x_{1,1}(x_{2,e_1})^{-1}=x_{2,1}(x_{1,e_1})^{-1}$;$x_{2,1}x_{3,e_1e_2}=x_{3,1}x_{2,e_1}$，即$x_{2,1}(x_{3,e_2})^{-1}=x_{3,1}x_{2,e_1}$;$x_{3,1}=x_{3,e_2}$.
+从而
+\begin{equation}\label{eq4}
+\begin{split}
+\pi_1(M)&=\langle x_{2,e_1},x_{1,e_1},x_{1,1},x_{2,1},x_{3,1},x_{3,e_2}|
+x_{1,1}(x_{1,e_1})^{-1},x_{3,1}(x_{3,e_2})^{-1},\\&~~~~~~~~~~~~~~~x_{1,1}(x_{2,1})^{-1}x_{1,1}(x_{2,e_1})^{-1}, x_{3,1}(x_{2，1})^{-1}x_{3,1}x_{2,e_1}
+\rangle \\
+&=\langle x_{1,1},x_{2,1},x_{3,1}|x_{1,1}(x_{2,1})^{-1}x_{1,1}x_{3,1}(x_{2，1})^{-1}x_{3,1}
+\rangle \\
+\end{split}\end{equation}
+即
+$\pi_1(M)=\langle x,y,z|xy^{-1}xzy^{-1}z\rangle$\\}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Connection with Group of Deck Transformation}
+\subsection{Universal Covering Space}
+设$\pi:M\longrightarrow P$为单多面体$P$上的 small cover. $P$的facets集为$\mathcal{F}(P)=\{F_1,F_2,\cdots,F_m\}$.
+下面我们将构造small cover $\pi:M\longrightarrow P$
+的（万有）覆叠空间
+\begin{equation}\label{eq5}
+\mathcal{M}=Q\times \pi_1(M)/\sim
+\end{equation}
+$(Q,\nu_1)$的外facet $F_{i,g_1}$与$(Q,\nu_2)$的外facet $F_{j,g_2}$粘当且仅当$i=j$，$g_1(g_2)^{-1}=\lambda(F_i),~\nu_1(\nu_2)^{-1}=x_{i,g_1}$（或者等价的$\nu_2(\nu_1)^{-1}=x_{i,g_2}$），其中$\nu_1,~\nu_2\in \pi_1(M)$. 
+下面为方便，我们把$(Q,\nu)$简记为$Q_{\nu}$，$Q_{\nu}$的facet $F_{i,g}$记为$F_{i,g}^{\nu}$. 
+
+下面我们说明$\mathcal{M}$实际上只与单多面体$P$及$P$的面结构有关. 
+%称一个$n$维多面体$P$为right angle orbifold，若它局部等同$\mathbb{R}^n/\mathbb{Z}_2^n$. 
+我们首先定义由$P$的面结构决定的{\em right-angle Coxeter group $W_P$}如下:
+$$W_P=\langle F_1,\cdots,F_m:F_i^2=1; (F_iF_j)^2=1, \forall F_i,F_j\in \mathcal{F}(P),F_i\cap F_j\neq \varnothing\rangle$$
+
+Davis-Januszkiewicz \cite{DJ1} Lemma 4.4 中构造了
+\begin{equation}\label{eq6}
+\mathcal{L}=(P\times W_P)/\sim
+\end{equation}
+其中$(x_1,g_1)\sim (x_2,g_2)$当且仅当$x_1=x_2$，$g_1(g_2)^{-1}\in \langle F:x\in F,~F\in\mathcal{F}(P)\rangle$. 且由Davis \cite{D1}（Theorem 10.1 and 13.5）知$\mathcal{L}$为单连通的.
+
+定义群同态$\psi:W\longrightarrow \mathbb{Z}_2^n$，其中$\psi(F_i)=\lambda(F_i), i=1,2,\cdots,m$.
+{\lem \label{lem1}设$\pi:M\longrightarrow P$为单多面体$P$上的small cover，则有群短正合列
+\begin{equation}\label{exact}
+1 \longrightarrow \pi_1(M)\longrightarrow
+%\overset{\alpha}{\longrightarrow}
+W_P\overset{\psi}{\longrightarrow}\mathbb{Z}_2^n \longrightarrow  1
+\end{equation}
+其中$\pi_1(M)\cong \ker\psi$为$W_P$的子群，$W_P=\pi_1(M)\rtimes \mathbb{Z}_2^n$}\\
+{\bf 证:}在Davis-Januszkiewicz \cite{DJ1}推论4.5中，我们知道有上面正合列成立，且$\pi_1(M)\cong \ker \psi$为$W_P$的正规子群. 不妨设$p_0$附近的facets为$\{F_1,F_2,\cdots,F_n\}$，$\lambda(F_i)=e_i$，考虑$\gamma:\mathbb{Z}_2^n\longrightarrow W_P$，$\gamma(e_i)=F_i, i=1,2,\cdots,n$，则$\psi\circ\gamma=id_{\mathbb{Z}_2^n}$，即上面短正合列是可裂的，故 $W_P=\pi_1(M)\rtimes \mathbb{Z}_2^n$.  $\hfill{} \Box$
+
+{\defn $\pi_1(M,p_0)$如形式\ref{eq0}，定义
+\begin{align*}
+\alpha:\pi_1(M,p_0)\longrightarrow& W \\
+ x_{i,g}\longmapsto& ~~\gamma(\phi_i(g))\cdot\gamma(\phi_i(1))F_i\cdot(\gamma(\phi_i(g)))^{-1}\\
+ &=\gamma(\phi_i(g)\phi_i(1))\cdot F_i\cdot\gamma(\phi_i(g))\\
+ &=\gamma(g)F_i\gamma(\phi_i(g))\overset{\Delta}{=}\widehat{F_{i,g}}
+\end{align*}
+
+其中第一个等号是由于$\{F_i\},~i=1,2,\cdots,n$相交点$p_0$，所以它们在$W$中对应的生成元是可交换的且幂等的.}
+{\lem \label{lem23}$\alpha$是well-defined，单的，且$\mathsf{im}\, \alpha= \ker \psi.$}\\
+{\bf 证：}首先验证$\alpha$将关系映为关系.
+对于配对关系，
+\begin{align*}
+\alpha(x_{i,g}x_{i,\phi_i(g)})&=\alpha(x_{i,g})\alpha(x_{i,\phi_i(g)})\\
+&=\gamma(g)F_i\gamma(\phi_i(g))\cdot \gamma(\phi_i(g))F_i\gamma(g)\\
+&=\gamma(g)(F_i)^2\gamma(g)=1
+\end{align*}
+对于余二维面对应的关系，
+\begin{align*}
+\alpha(x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_i\phi_j(g)}x_{j,\phi_j(g)})&=\alpha(x_{i,g})\alpha(x_{j,\phi_i(g)})\alpha(x_{i,\phi_i\phi_j(g)})\alpha(x_{j,\phi_j(g)})\\
+&=\gamma(g)(F_iF_j)^2\gamma(g)=1
+\end{align*}
+所以$\alpha$是well-defined.
+
+$\mathsf{im}\,\alpha$显然为$W$的子群，下说明它是$W$的正规子群.
+任意$\widehat{F_{i,g}}\in \mathsf{im}\,\alpha,F_k\in W$，\begin{align*}
+F_k\widehat{F_{i,g}}F_k^{-1}&=\widehat{F_{k,1}}\gamma(\phi_k(1))\widehat{F_{i,g}}\gamma(\phi_k(1))\widehat{F_{k,\phi_k(1)}}\\
+&=\widehat{F_{k,1}}\widehat{F_{i,g\cdot\phi_k(1)}}\widehat{F_{k,\phi_k(1)}}\in \mathsf{im}\,\alpha
+\end{align*}
+进一步，对任意$\alpha(\nu)\in\mathsf{im}\,\alpha, \omega\in W$，都有$\omega\alpha(\nu)\omega^{-1}\in \mathsf{im}\,\alpha$.
+即$\mathsf{im}\,\alpha$是正规的. 
+
+从上面我们发现$\alpha$将$Q$中的余二维面对应的关系及关系的共轭一一地映到对应$P$中余二维面所决定的关系及关系的共轭.
+我们在Coexter group中加入一些冗余的生成元和关系，得
+\begin{multline}
+W=W'=\langle F_i,\widehat{F_{i,g}},i=1,2,\cdots,m;g\in\mathbb{Z}_2^n :\widehat{F_{i,g}}\widehat{F_{i,\phi_i(g)}}=1, \\\widehat{F_{i,g}}\widehat{F_{j,\phi_i(g)}}\widehat{F_{i,\phi_i\phi_j(g)}}\widehat{F_{j,\phi_j(g)}}=1,\forall i,j,g;f=F_{i,g}\cap F_{j,g}\neq \varnothing\rangle
+\end{multline}
+任取$\nu\in \pi_1(M)$为生成元上的文字，则$\alpha(\nu)\in W$为$\{\widehat{F_{i,g}}\}$上的文字. 若$\alpha(\nu)=1$，则它可以由$W$中的关系及关系的共轭拼成，然后我们把每一小段关系或关系的共轭，唯一地对应到$\pi_1(M)$中的关系及关系的共轭，然后依次拼成一个新的文字$\nu'(=1)$. 则$\nu=\nu'=1\in \pi_1(M)$.
+%所以$W$中某个文字等于$1$，在$\pi_1(M)$中一定存在唯一等于$1$的文字和它对应. 
+即$\alpha$是单的.
+%或者说$W$和$\pi_1(M)$中的word problem 可以通过$\alpha$联系起来.
+%任取$\nu\in \pi_1(M)$为生成元上的文字，若$\alpha(\nu)=1\in W$，则$\alpha(\nu)$可以由$W$中的关系及关系的共轭拼成，然后我们把每一段关系，唯一地对应到$\pi_1$中，依次拼成一个新的文字，记为$\nu'(=1)\in \pi_1(M)$. 则$\nu=\nu'$
+
+
+最后由于$W/\mathsf{im}\,\alpha\cong \mathbb{Z}_2^n$.
+故$\mathsf{im}\, \alpha= \ker \psi$. $\hfill{} \Box$
+
+{\rem $\forall \nu=F_{i_1}F_{i_2}\cdots F_{i_k}\in \ker \psi $，
+设$i_{j_1}$是第一个大于$n$的指标，取$g_1=\psi(F_{i_1}F_{i_2}\cdots F_{i_{j_1-1}})$，则$\nu=\widehat{F_{i_{j_1}},g_1}\cdot \gamma(\phi_{i_{j_1}}(g_1))F_{i_{{j_1}+1}}\cdots F_{i_k}$. 进行有限步归纳可以得到$\nu=\widehat{F_{i_{j_1}},g_1}\widehat{F_{i_{j_2}},g_1}\cdots \widehat{F_{i_{j_{k'}}},g_{k'}}$. 即$\ker \psi\subset \mathsf{im}\,\alpha$，从而$\ker \psi= \mathsf{im}\,\alpha$.}
+
+
+
+{\lem $\mathcal{L}\cong \mathcal{M}$}\\
+%{\bf 证:}由$\mathcal{L}$和$\mathcal{M}$的构造中，它们局部都是通过单多面体$P$的顶点附近的facets做反射得到的，所以我们只需要证明$\mathcal{L}$和$\mathcal{M}$中的$P$存在着某种index 对应即可. $W_P=\pi_1(M)\rtimes \mathbb{Z}_2^n$，所以任意$\omega\in W_P$，存在唯一的$\nu\in\pi_1(M),g\in\mathbb{Z}_2^n$，使得$\omega=\nu g$.
+%
+% $\mathcal{L}$中$(P,\omega_1)$的面$F_i$与$(P,\omega_2)$的面$F_i$相粘当且仅当$\omega_2(\omega_1)^{-1}=F_i\in W_P$，即$F_i=\nu_1 g_1 (\nu_2 g_2)^{-1}=\nu_1 g_1 (g_2)^{-1}(\nu_2)^{-1}$.
+% $\mathcal{M}$中的$(P,g_1)_{\nu_1}$的面$F_{i,g_1}$与$(P,g_2)_{\nu_2}$facet $F_{i,g_2}$粘当且仅当$g_1(g_2)^{-1}=\lambda(F_i),\nu_1(\nu_2)^{-1}=F_{i,g_1} ~or~ \nu_2(\nu_1)^{-1}=F_{i,g_2}$，当且仅当$F_i=\nu_1 g_1 (\nu_2 g_2)^{-1}=\nu_1 g_1 (g_2)^{-1}(\nu_2)^{-1}$
+%
+%
+%为了避免混淆，我们把$W_P$的第$i$个生成元$F_i$记为$\omega_i$.我们下面仅考虑第$1={1'}\cdot {1''}$（分别为$W_P,\pi_1(M),\mathbb{Z}_2^n$中的单位元）个多面体$P$的第$i$个面$F_i$的情况，在$\mathcal{L}$中，它与第$\omega_i$个$P$的面$F_i$粘，不妨设$\omega_i=\nu_1g_1$，其中$\nu_1\in \pi_1(M),g_1\in\mathbb{Z}_2^n$；另一方面在$\mathcal{M}$中，$F_{i,1''}^{1'}$与$F_{i,\lambda(F_i)}^{x_{i,1}}$配对粘在一起. 
+%第$1'$个$Q$中的第$1''$个多面体$P$的面$F_i$，与第$x_{i,1}\in\pi_1(M)$个$Q$中的第$\lambda(F_i)$个多面体$P$的面$F_i$粘，
+%由于$P$相对于$\mathcal{M}$的覆叠变换群仍为面生成的$W_P$，所以$x_{i,1}\lambda(F_i)=\omega_i$，由于$\omega_i=\nu_1g_1$是唯一的，所以$x_{i,1}=\nu_1,\lambda(F_i)=g_1$，即证. 其他位置的$P$类似，所以$\mathcal{M},\mathcal{L}$局部构造一致，从而为同一个空间。  $\hfill{} \Box$\\
+{\bf 证明：}$\mathcal{L}$和$\mathcal{M}$之间的同胚是由分裂短正合列(\ref{exact})给出的，
+\begin{diagram}\label{exact1} 
+1&\rTo &\pi_1(M) & \rTo^{\alpha} & W_P &  \pile{\rTo^{\psi} \\ \lTo_{\gamma}}&\mathbb{Z}_2^n &\rTo&1\\
+\end{diagram}
+其中$\psi\circ\gamma=\text{id}_{\mathbb{Z}_2^n}$. 
+
+%在我们的胞腔构造过程中，设$\{F_1,F_2,\cdots,F_n\}$为顶点$p_0$附近的$n$个facets，$\lambda(F_i)=e_i, i=1,2,\cdots,n$，从而我们可以把$2^n$个$P$的copy在$p_0$处粘在一起得到$Q$，即取$\{F_1,F_2,\cdots,F_n\}$为$Q$的内facets，最后得到基本群的表达形式如（\ref{eq0}）. 这在引理\ref{lem1}\, 的短正合列中，等价于$\psi(F_i)=\lambda(F_i)=e_i, i=1,2,\cdots,n$. 
+%所以$\psi(F_k)=\lambda(F_k)=e_{i_1}e_{i_2}\cdots e_{i_K}=\psi(F_{i_1})\psi(F_{i_2})\cdots \psi(F_{i_K})=\psi(F_{i_1}F_{i_2}\cdots F_{i_K})$，即$\psi(F_k\left(F_{i_1}F_{i_2}\cdots F_{i_K}\right)^{-1})=1$，其中$k=1,2,\cdots,m$. $F_1,F_2,\cdots,F_n$在$M$中对应的闭路是可缩的，所以$F_k$对应的闭路是$\ker \psi$的生成元.
+%我们不妨设$\alpha(x_{k,1})=F_k\left(F_{i_1}F_{i_2}\cdots F_{i_K}\right)^{-1}=F_kF_{i_1}F_{i_2}\cdots F_{i_K}\overset{\Delta}{=}\widehat{F}_k$，其中$F_{i_1},F_{i_2},\cdots F_{i_K}$是可交换的，这是因为$F_1,F_2,\cdots,F_n$相交于点$p_0$. 则
+注意到$F_i=\alpha(x_{i,1})\gamma(\phi_i(1))\overset{\Delta}{=}(x_{k,1},~\phi_i(1))=(x_{k,1},~\lambda(F_k))$.
+进一步我们设$\varphi:\mathbb{Z}_2^n\longrightarrow Aut(\pi_1(M))$~via ~$\varphi_g(\nu)=\alpha^{-1}(\gamma(g)\alpha(\nu)\gamma(g^{-1}))=\alpha^{-1}(\gamma(g)\alpha(\nu)\gamma(g))$，其中$g\in \mathbb{Z}_2^n, \nu\in \pi_1(M)$. 定义$(\nu_1,g_1)\cdot(\nu_2,g_2)=(\nu_1\varphi_{g_1}(\nu_2),g_1g_2)$.
+
+下面我们定义$h:\mathcal{L}\longrightarrow \mathcal{M}$ via. $h(x,\omega)=(x_g,\nu)$，当$\omega=F_k$时，$\omega=\alpha(x_{k,1})\gamma(\lambda(F_k))$. 由于$W_P$是群$\mathbb{Z}_2^n$和$\pi_1(M)$半直积，所以这种分解是唯一的. 进一步，$\forall\omega\in W_P$为$\{F_1,F_2,\cdots F_m\}$上的文字，则有分解$\omega=\alpha(\nu)\gamma(g)=(\nu,g)$，其中$g\in\mathbb{Z}_2^n,~\nu\in \pi_1(M)$是唯一的. 
+
+定义$h^{-1}:\mathcal{M}\longrightarrow \mathcal{L}$ via.
+$h^{-1}(x_g,\nu)=(x,\alpha(\nu)\gamma(g))$.
+
+$h\circ h^{-1}(x_g,\nu)=h(x,\alpha(\nu)\gamma(g))=(x_g,\nu)$；
+
+$h^{-1}\circ h(x,\omega)=h^{-1}(x_g,\nu)=(x,\alpha(\nu)\gamma(g))=(x,\omega)$.
+
+$h,h^{-1}$局部上为identity，故为局部同胚.
+%$h,h^{-1}$的连续性是由于它们作用在$x$的局部为identity.
+
+所以 $\mathcal{L}\cong \mathcal{M}$  $\hfill{} \Box$
+
+%remark:ideal:下面我们说明$\alpha$是well-defined, 单的.自然的想法，$Q$中余二维面对应的胞腔对应的关系一一映到$P$中的余二维面对应的关系. 这样的话，把关系映为关系，它是well-defined.任意文字映过去是单位元，则他的像可以用$W$中的关系文字表示，一一的，考虑回去，自然那些也是闭路，且与原来的文字在$\pi_1$中等价.
+
+%{\bf 注：}一般位置，$\mathcal{L}$中$(P,\omega_1)$的面$F_i$与$(P,\omega_2)$的面$F_i$相粘当且仅当$\omega_2(\omega_1)^{-1}=F_i\in W_P$，即$F_i=\nu_1 g_1 (\nu_2 g_2)^{-1}=\nu_1 g_1 (g_2)^{-1}(\nu_2)^{-1}$.
+%$\mathcal{M}$中的$(P,g_1)_{\nu_1}$的面$F_{i,g_1}$与$(P,g_2)_{\nu_2}$facet $F_{i,g_2}$粘当且仅当$g_1(g_2)^{-1}=\lambda(F_i),\nu_1(\nu_2)^{-1}=F_{i,g_1} ~or~ \nu_2(\nu_1)^{-1}=F_{i,g_2}$，当且仅当$F_i=\nu_1 g_1 (\nu_2 g_2)^{-1}=\nu_1 g_1 (g_2)^{-1}(\nu_2)^{-1}$
+%{\rem 在我们的胞腔构造过程中，设$\{F_1,F_2,\cdots,F_n\}$为顶点$p_0$附近的$n$个facets，$\lambda(F_i)=e_i, i=1,2,\cdots,n$，从而我们可以把$2^n$个$P$的copy在$p_0$处粘在一起得到$Q$，即取$\{F_1,F_2,\cdots,F_n\}$为$Q$的内facets，最后得到基本群的表达形式如（\ref{eq0}）. 这在引理\ref{lem1}的短正合列中，等价于$\psi(F_i)=\lambda(F_i)=e_i, i=1,2,\cdots,n$. 所以$\psi(F_k)=\lambda(F_k)=\prod  e_i^{\delta_i}=\prod  \lambda(F_i)^{\delta_i}=\prod  \psi( F_i^{\delta_i})$，即$\psi(F_k\left(\prod F_i^{\delta_i}\right)^{-1})=1$，其中$k=1,2,\cdots,m;~i=1,2,\cdots,n$; $\delta_i$表示$\lambda(F_k)$上有无$e_i$分量. $F_1,F_2,\cdots,F_n$在$M$中对应的闭路是可缩的，所以$F_k$对应的闭路是$\ker \psi$的生成元.我们不妨设$\alpha(x_{k,1})=F_k\left(\prod F_i^{\delta_i}\right)^{-1}=F_k\prod F_i^{\delta_i}\overset{\Delta}{=}\widehat{F}_k$，其中连乘积中的项是可交换的（$F_1,F_2,\cdots,F_n$相交于点$p_0$）. 则$F_k=\alpha(x_{k,1})\gamma(\lambda(F_k))\overset{\Delta}{=}(x_{k,1},~\lambda(F_k))$.进一步我们设$\varphi:\mathbb{Z}_2^n\longrightarrow Aut(\pi_1(M))$~via ~$\varphi_g(\nu)=\alpha^{-1}(\gamma(g)\alpha(\nu)\gamma(g^{-1}))=\alpha^{-1}(\gamma(g)\alpha(\nu)\gamma(g))$，其中$g\in \mathbb{Z}_2^n, \nu\in \pi_1(M)$. 定义$(\nu_1,g_1)\cdot(\nu_2,g_2)=(\nu_1\varphi_{g_1}(\nu_2),g_1g_2)$. 所以$h$的定义可以从$W_P$的生成元$F_i$延拓到整个群$W_P$中.
+
+%我们可以规定$W_P$的生成元$F_i$可以对应$(x_{i,1},~\lambda(F_i))$，一般地$F_{i}F_{j}=(x_{i,1},\lambda(F_{i}))\cdot(x_{j,1},\lambda(F_{j}))=(x_{i,1}\varphi_{\lambda(F_{i})}(x_{j,1}), \lambda(F_{i})\lambda(F_{j}))$. 特别的若$F_i$为内facet，则$F_{i}F_{j}=(x_{j,e_i},\lambda(F_{i})\lambda(F_{j}))$. 
+%其中这里的乘积运算可以看为$\pi_1(M),\mathbb{Z}_2^n$看作$\pi_*,\widetilde{\psi}$（满足短正合列可裂的$\mathbb{Z}_2^n\longrightarrow W_P$的映射）作用下在$W_P$中的群运算.}
+
+接下来我们将证明$\mathcal{M}$为$M$的万有覆叠空间.
+我们记$\Pi:\mathcal{M}\longrightarrow M$为$\mathcal{M}$到$M$的投射.
+\begin{diagram}
+Q\times \pi_1(M) &\rTo^{q'} &Q\times \pi_1(M)/\sim=\mathcal{M}\\
+\dTo^{\widetilde{\Pi}}&     &   \dTo^{\Pi}\\
+Q   &\rTo^{q}&Q/\sim=M
+\end{diagram}
+其中$q, q'$是粘合$F_{i,g_1}^{\nu_1}$和$F_{i,g_2}^{\nu_2}$决定的商映射. 
+
+%下面我们说明，small cover 中的任意一个点在某种意义上是地位是一样的.
+%{\lem 设$\pi:M\longrightarrow P$为一个固定的small cover，则$\forall x\in M$，$M$可以在点$x$处分解成$2^n$个同构于$P$的多面体.}\\
+%{\bf 证明：}%我们同样先把$2^n$个多面体$P$的copy在它们的一个顶点$p_0$出粘在一起，得到一个大的多面体$Q$
+%我们考虑商映射$q:Q\longrightarrow M$，这里不妨设$Q$是凸的.  
+%若$q^{-1}(x)\subset Q^{\circ}$，则$q^{-1}(x)$为单元集，不妨设$y=q^{-1}(x)$.
+%我们在$Q$的内部将点$p_0$连同它附近的$Q$的内面线性地拉到到点$x$处，则此时$Q$可以看为点$x$附近的$2^n$个$P$的copy粘成的. 
+
+%若$q^{-1}(x)\subset \partial Q$，任取$y\in q^{-1}(x)$，我们记$f(y)$为$out(Q)$中包含$y$为相对内点的最小的面，不妨设$f(y)$为余$k$维的，则所有的$\{f(y):y\in q^{-1}(x)\}$都是identity，且$|(q')^{-1}(x)|=2^k$. 事实上，商映射$q$对$\partial Q$上点的局部作用就是将$q^{-1}(x)$中的点连同包含这些点为相对内点的最小的面粘在一起.
+%接下来我们将$Q$重新分解成$P$的copy，并将它们在$f(y)$的某个顶点处粘在一起，得到一个大的多面体，记为$\mathop{{Q}'}$，将$Q'$的外facets按照染色信息成对粘在一起，得到同样的small cover $M$. 此时$x$在$Q'$中的原象位于$Q'$的内部，进行上面讨论.  $\hfill{} \Box$
+
+{\thm $\mathcal{M}$为$M$的万有覆叠空间.}\\
+%{\bf 证明：}根据上面引理，我们不妨考虑点$x=\pi^{-1}(p_0)\in M$，则$q^{-1}(x)\subset Q^{\circ}$为单元集，我们可以取包含$q^{-1}(x)$的$n$维实心开球$U$，满足$U\subset Q^{\circ}$. 
+%则$q(U)$为$M$中包含$x$的开邻域，与$U$为identity. 且$(\widetilde{\Pi})^{-1}(U)$为$|\pi_1(M)|$个互不相交开球的并，即
+%$$(\widetilde{\Pi})^{-1}(U)=\bigsqcup\limits_{\nu\in \pi_1(M)}V_\nu$$
+%其中每个$V_\nu\subset (Q_\nu)^{\circ}$与$U$为identity. 则
+%$$(\Pi)^{-1}(q(U))=q'((\widetilde{\Pi})^{-1}(U))=\bigsqcup\limits_{\nu\in \pi_1(M)}q'(V_\nu)$$
+%为一族互不相交的开集，且$\Pi$限制在每一个$q'(V_\nu)$上都为到$q(U)$的identity. 
+%
+%当$q^{-1}(x)\subset \partial Q$时，我们将$Q$换成$Q'$，得到的$\mathcal{M}$实际上是不变的，这是因为$\mathcal{M}$是由多面体$P$决定的. 所以我们可以类似进行上面的操作.
+%
+%故$\mathcal{M}$为$M$的覆叠空间. 又因为$\mathcal{M}\cong\mathcal{L}$为单连通的，故为万有覆叠空间.  $\hfill{} \Box$
+{\bf 证明：}由$\mathcal{M}$的定义知$\mathcal{M}/\pi_1(M)=M$.
+下面只需要证明$\forall x\in \mathcal{M}$，存在包含点$x$的开邻域$U$，使得不同的$\nu\in\pi_1(M)$，$\nu(U)$不交.
+
+当点$x=q^{-1}(x)\in Q^\circ$时，取包含点$x$的一个实心开球邻域$U$，使得$U\subset Q^\circ$，此时$\nu(U)$落在不同指标的$Q$中，是不交的.
+当$x=q^{-1}(x)\subset \partial Q$，我们记$f(x)$为$out(Q)$中包含$x$为相对内点的最小的面，不妨设$f(x)$为余$k$维的，则我们取包含点$x$的实心开球邻域$U$，满足$U$与包含点$x$的$Q$的copy的交都是$\frac{1}{2^k}$球，这时$\nu(U)$显然也是不交的.
+
+所以$\mathcal{M}$是$M$一个正则的覆叠空间，又$\mathcal{L}\cong \mathcal{M}$是单连通的，故为万有覆叠空间.
+$\hfill{} \Box$
+
+设$D(\mathcal{M},\Pi,M)$为上面覆叠空间$\Pi: \mathcal{M}\longrightarrow M$的覆叠变换群. 由于$\mathcal{M}$是单连通的，所以$\pi_1(M)\cong D(\mathcal{M},\Pi,M)$. 
+下面我们根据上面构造的cell structure（的$2$-skeleton）来刻画$D(\mathcal{M},\Pi,M)$的生成元. 
+%这本质上是利用基本域的想法描述离散群.
+
+对于$Q$中的每个facet $F_{i,g}$，我们定义$\mathcal{M}$上的{\em 面映射}$\Gamma_{i,g}:\mathcal{M}\longrightarrow \mathcal{M}$. $\forall x\in \mathcal{M}$，存在某个$Q_{\nu_1}$，使得$x\in Q_{\nu_1}$，由$\mathcal{M}$的构造知存在唯一的$Q_{\nu_2}$，使得$F_{i,g}\subset Q_{\nu_1}\cap Q_{\nu_2}$，我们定义$\Gamma_{i,g}(x)$为$\Pi^{-1}(\Pi(x))\cap Q_{\nu_2}$中的唯一的一点，这样定义的$\Gamma_{j,g'}$显然是well-defined的. $\Gamma_{i,g}$的连续性也是显然的.
+
+{\rem 由上面$\alpha$定义知，面映射$\Gamma_{i,g}$可以表示Coxeter group 中的反射.}
+
+类似引理\ref{lem3}容易验证
+
+{\lem 1、$\Gamma_{i,g}\Gamma_{i,\phi_i(g)}(x)=x$. \\
+2、若存在$F_{j,g'}(\neq F_{i,g})\subset Q_{\nu_1}\cap Q_{\nu_2}$，则$\Gamma_{j,g'}(x)=\Gamma_{i,g}(x)$. \\
+3、若facet $F_{i,g}\in in(Q)$，此时$Q_{\nu_1}=Q_{\nu_2},\Gamma_{i,g}=id.$}
+
+进一步我们有
+{\lem 面映射$\Gamma_{i,g}:\mathcal{M}\longrightarrow \mathcal{M}$为$\mathcal{M}$上的覆叠变换.
+}
+
+{\prop $D(\mathcal{M},\Pi,M)$可以由面映射$\{\Gamma_{i,g}\}$来刻画.}\\
+{\bf 证明：}$\mathcal{M}$为单连通的，此时$\pi_1(M,p_0)$到$D(\mathcal{M},\Pi,M)$的满同态实际上为群同构，它将$[x_{i,g}]\in \pi_1(M,p_0)$映为$\Gamma_{i,g}$. 
+我们不妨取点$x=\pi^{-1}(p_0)\in M$，则$\{\Pi^{-1}(x)\}$实际上是每个$Q$中$p_0$的copy. 我们取第$1$个$Q_1$中的$p_0$的copy，记为$y_0$，其中$1$为$\pi_1(M)$的单位元. 所以我们只需要验证$\Gamma_{i,g}(y_0)=\widetilde{x_{i,g}}(1)$，其中$\widetilde{x_{i,g}}$是$x_{i,g}$在$\mathcal{M}$中的一段提升.
+%，则$\{\Pi^{-1}(x)\}=\{y=h(y_0):h\in \pi_1(M)\}$
+$\Gamma_{i,g}(y_0)$实际上是$Q_{x_{i,g}}$中的$p_0$的copy，即$\widetilde{x_{i,g}}(1)$. 所以$D(\mathcal{M},\Pi,M)$的生成元可以自然的选为$Q$的facets 对应的面映射.  $\hfill{} \Box$
+%另外容易看到$\Pi^{-1}(x_{i,g})$在$\mathcal{M}$中的一段提升是连接$y_0$与$\Gamma_{i,g}(y_0)$的一条道路设为$\gamma$，即$\Gamma_{i,g}(y_0)=\gamma_{\#} y_0$，则$\Pi_*(\pi_1(\mathcal{M},\Gamma_{i,g}(y_0)))=\Pi_*(\pi_1(\mathcal{M},\gamma_{\#}y_0))=\Pi_*((\gamma)^{-1}\pi_1(\mathcal{M}, y_0)\gamma)=\Pi_*((\gamma)^{-1})\Pi_*(\pi_1(\mathcal{M}, y_0))\Pi_*(\gamma)=x_{i,g}^{-1}\Pi_*(\pi_1(\mathcal{M}, y_0))x_{i,g}=x_{i,\phi_i(g)}\Pi_*(\pi_1(\mathcal{M}, y_0))x_{i,g}$
+
+%任取一点$y\in (q')^{-1}(x)$，取$U_y=Q\cap D(y,\epsilon)$，其中$D(y,\epsilon)$以$y$为圆心，足够小的$\epsilon$为半径的$n$维实心开球. 则$q(U)$为$M$中包含点$x$的$n$维实心开球，其中$U=\bigsqcup\limits_{y\in (q')^{-1}(x)}U_y$.事实上记$f(y)$为$out(Q)$中包含$y$为相对内点的最小的面，不妨设为余$k$维的，则$|(q')^{-1}(x)|=2^k$，每个$U_y$实际上是小开球的$\frac{1}{2^k}$，它们在$q$的作用下粘成一个整开球.进一步，$$(\widetilde{\Pi})^{-1}(U)=\bigsqcup\limits_{\nu\in \pi_1(M)}V_\nu$$且每个$V_\nu\subset (Q_\nu)$与$U$为identity.由$\mathcal{M}$的构造知，$q'(\widetilde{\Pi})^{-1}(U)$实际上是将不同$Q_\nu$的$V_\nu$也粘为$|\pi_1(M)|$个互不相交的$n$维实心开球，且每个开球与$q(U)$是identity的.这就证明了$\Pi:\mathcal{M}\longrightarrow M$为一个覆叠空间. 
+
+%下面说明它是正则的.不妨取$x_0=q(p_0)\in M$，任意$y\in (\Pi)^{-1}(x_0)$
+
+%取$p'_0\in q'\subset \mathcal{M}$，其中这里的$1$为$\pi_1(M)$的单位元，满足$\Pi(p'_0)=p_0$，则$\Pi^{-1}(p_0)$与$\{h(p'_0):h\in \pi_1(M)\}$是一一对应的，进一步若$\mathcal{M}$单连通，则$D(\mathcal{M},\Pi,M)\cong \pi_1(M)$，且$D(\mathcal{M},\Pi,M)$就是由上面facets 对应的面映射生成的，即我们构造的cell structure 自然对应于它的万有覆叠的覆叠变换群.
+
+综上，我们有下面结论：
+{\thm $\Pi:\mathcal{M}\longrightarrow M$为$M$的万有覆叠空间，复叠变换群$D(\mathcal{L},\Pi,M)\cong\pi_1(M)$可以由$Q$的facets对应的面映射生成.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Naturality of the Cell Structure}
+最后我们解释一下我们这种胞腔结构的自然性. 我们考虑$M[2]$，它的$0$-skeleton只有一个点$p_0$; 它的$1$-skeleton 是$\vv{x_{i,g}}$的一点并，对应$\pi_1(M)$的生成元; 它的每一个二维胞腔对应$\pi_1(M)$的一个关系. 即$M[2]$是$\pi_1(M,p_0)$的{\em presentation complex}.
+进一步，我们将$M$的这种胞腔结构提升到它的万有覆叠空间$\mathcal{M}$中，则$\mathcal{M}[2]$实际上是$\pi_1(M,p_0)$的{\em Cayley $2$-complex.}
+
+事实上，将单多面体$P$视为一个 right angle orbifold，则small cover $\pi:M\longrightarrow P$为$P$上的一个covering orbifold. 
+由于$M$为一个闭流形，$P$为一个good orbifod，则$P$的单连通的covering orbifold $\mathcal{M}$为它的万有covering orbifold.
+%我们可以将$Q$看为关于群$\pi_1(M)$的基本域，$P$看为关于coxeter群$W_P$的基本域. 即
+进一步，
+covering orbifold $\tau:\mathcal{M}\longrightarrow P$ 为covering space $\Pi:\mathcal{M}\longrightarrow M$ 和small cover $\pi:M\longrightarrow P$的复合. 
+它们的覆叠变换群分别为$W_P, \pi_1(M)$ 和$\mathbb{Z}_2^n$.（Davis-Januszkiewicz \cite{DJ1}）
+
+我们定义$\pi_1^{orb}$为universal orbifold cover $\tau:\mathcal{M}\longrightarrow P$的覆叠变换群.
+即$\pi_1^{orb}(P)=W_P$.
+%此时$\pi_1^{orb}(P)$和$\pi_1(M)$存在自然的子群关系.
+我们对单多面体$P$做类似的cubical 分解，则某种意义上，$P[2]$为$W_P$的presentation complex. 把这种分解提升到$\mathcal{M}$中，则$\mathcal{M}'[2]$实际上是$W_P$的一个 Cayley 2-complex （Davis \cite{D2}）. 我们可以类似定义$P$的facets pair 结构，每个$F_i$都是对合的，即它的配对facet 是它本身，对应的面映射为反射. 进一步，facet $F$中$F'\cap F$对应的面映射，在面包含作用下，对应$W_P$中的$FF'F=F'$.
+
+
+%比如对任意$n$维单凸多面体$P$，设$P$的重心为$p_0$，所有facets的重心为$p_1,p_2,\cdots,p_m$. 我们构造$\widetilde{P}=P\times \mathbb{Z}_2/\sim$，$(x,-1)\sim (y,1)$当且仅当$x=y\in\partial P$或者$(p_i,-1)\sim(p_j,1)$，即由它们的对应的面相粘得到$S^n$，再把$S^n$中$p_0,p_1,p_2,\cdots,p_m$的点捏成一点得到，或者直观上我们可以看为连接$S^n$的球心和$p_i$得到的一个拓扑空间. $\widetilde{P}$是由$P$决定的一个CW-complex，$\pi_1(\widetilde{P})=W_P$. 另外small cover $M$的Borel construction $BP=E\mathbb{Z}_2^n\times_{\mathbb{Z}_2^n} M$是由多面体$P$决定的，$\pi_1(M)=W_P$.（Davis-Januszkiewicz \cite{DJ1}）\begin{figure}[h]\centering\def\svgwidth{0.8\textwidth}\input{Nat.pdf_tex}\end{figure}
+
+%我们取$\mathcal{F}_2(Q)$中的任意一个facet $F$，诱导small cover 记为$M_F$，设与$F$横截相交的一维face为$F'$，诱导的small cover ($S^1$) 记为$M_{F'}$. 则$M_F$与$M_{F'}$是横截相交的，所以$[M_F]$的对偶上同调类与$[M_{F'}]$的对偶上同调类的cup 积是$[M_{F\cap F'}]$的对偶. 进一步对任意余$k$维面$f=F_1\cap F_2 \cap \cdots \cap F_k$，$M_f$对应的上同调类，都可以由一维上同调类生成. 即这里我们可以取上同调环$H^*(M)$的生成元为外facets对应的闭路对应的$1$维上同调类.（Davis-Januszkiewicz \cite{DJ1}）
+ 
+ 
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$\pi_1$-injectivity of Facial Submanifold}
+设$F$为单多面体$P$的任意一个facet，则它依然是单凸的，且$\mathcal{F}(F)$可以继承$\mathcal{F}(P)$上的染色，进而可以构造$F$上的small cover $\pi_F:M_F\longrightarrow F$. 在Davis-Januszkiewicz \cite{DJ1} Lemma 1.3 中，我们知道$M_F$为$M$的$n-1$维连通子流形. 
+
+在这一节中，我们利用上面的胞腔结构，讨论$\pi_1(M_F)$与$\pi_1(M)$之间的关系. 我们设多面体$P,F$对应的Coxeter group 分别为$W_P=\langle G:R \rangle,~W_F=\langle G_F:R_F\rangle$.
+我们取定$F$的一个顶点$p_0$为基点，我们将$2^n$个单多面体$P$在$p_0$处粘在一起，分析它们的胞腔结构，可以得到$M,M_F$的基本群，群表示形式如（\ref{eq0}），记$\pi_1(M,p_0)=\langle \widetilde{G}:\widetilde{R}\rangle,~\pi_1(M_F,p_0)=\langle \widetilde{G}_F:\widetilde{R}_F\rangle$. 
+
+下面我们设$\rho:F\longrightarrow P$为面包含映射，$\rho_*:W_F\longrightarrow W_P$为$\rho$决定的Coxeter group之间的群同态，设$\widetilde{\rho}:M_F\longrightarrow M$为$\rho$决定的Facet子流形$M_F$到$M$的包含映射，$\widetilde{\rho}_*:\pi_1(M_F)\longrightarrow\pi_1(M)$为它诱导的基本群之间的群同态.
+
+下面不妨设$F$为$P$的第$1$个facet，$\lambda(F)=e_1$.
+{\lem \label{lemm}
+1、$\rho_*|_{G_F}$和$\rho_*|_{R_F}$都为单射.\\
+2、$\widetilde{\rho}_*|_{\widetilde{G}_F}$和$\widetilde{\rho}_*|_{\widetilde{R}_F}$都为单射.\\
+}
+{\bf 证明：}
+%%%%%%%%%Coxeter group 部分 
+1、设$P$中与$F$相交的Facets集为$\mathcal{F}_1=\{F_{i_1},F_{i_2},\cdots,F_{i_{m'}}\}\subset \mathcal{F}(P)$，则$G_F=\mathcal{F}(F)=\{F_{i_1}\cap F,F_{i_2}\cap F,\cdots,F_{i_{m'}}\cap F\}$. 所以自然地，$\rho_{*}(F_{i_k}\cap F)=FF_{i_k}F=F_{i_k}$. 进一步，$F$中余二维面（不妨取）$(F_{i_{1}}\cap F)\cap (F_{i_{2}}\cap F)(\neq\varnothing)$决定的关系$((F_{i_{1}}\cap F)(F_{i_{2}}\cap F))^2$在$\rho_{*}$在的像为$(F_{i_{1}}F_{i_{2}})^2$. 
+即$\rho_{*}$把$W_F$中的生成元和关系单得映为群$W_P$中的生成元和关系. 
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.55\textwidth}
+\input{FF.pdf_tex}
+\end{figure}
+
+%%%%%%%%%Fundamental Group 部分
+2、我们下面证明$M_F$的二维骨架$M_F[2]$可以自然的包含到$M[2]$中. 我们分别将$\{F_g\}_{g\in \mathbb{Z}_2^{n-1}}$与$\{P_g\}_{g\in \mathbb{Z}_2^{n}}$在点$p_0$处粘合在一起，分别得到多面体$Q$与$Q_F=F\times \mathbb{Z}_2^{n-1}/\sim$.则$out(Q_F)\subset out(Q),in(Q_F)\subset in(Q)$. 设$f_{i}=F_i\cap F\neq \varnothing$为$F$的一个任意的facet，$f_i\cap f_j=F_i\cap F_j\cap F\neq \varnothing$为$F$的一个任意的余2维面. 设$f_{i,g}=F_{i,g}\cap F_{1,g}=F_{i,\phi_i(g)}\cap F_{1,\phi_i(g)}$为$Q_F$中的任意一个facet，其中$\{F_{1,g},F_{1,\phi_i(g)}\}$为$\{P_g: g\in \mathbb{Z}_2^n\}$中的facets-pair. 由引理\ref{lem3}~，我们知道$f_{i,g}$在$Q_F$中对应的有向闭路与$F_{i,g}$和$F_{i,\phi_i(g)}$在$Q$中对应的有向闭路$x_{i,g},x_{i,\phi_i(g)}$是定点同伦的，所以我们不妨记$f_{i,g}$在$Q_F$中对应的有向闭路为$x_{i,g}$.对于$Q_F$中的任意一个余$2$维面$f_{i,g}\cap f_{j,g}=F_{i,g}\cap F_{j,g}\cap F_{1,g}\neq\varnothing$所对应的二维胞腔$D_l$与$F_{i,g}\cap F_{j,g}$和$F_{i,\phi_i(g)}\cap F_{j,\phi_i(g)}$所对应的二维胞腔$D_{g},D_{\phi_i(g)}$是也是定点同伦的，所以在$\pi_1(M_F)$中，$f_{i,g}\cap f_{j,g}$决定的关系与$F_{i,g}\cap F_{j,g}(\cap F_{1,g}\neq \varnothing)$或者$F_{i,\phi_i(g)}\cap F_{j,\phi_i(g)}(\cap F_{1,\phi_i(g)}\neq \varnothing)$在$\pi_1(M)$中决定的关系对应。
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.6\textwidth}
+\input{inje1.pdf_tex}
+\end{figure}
+所以$M_F$的基本群为
+\begin{multline}
+\pi_1(M_F)=\langle x_{i,g},i=i_1,i_2,\cdots,i_{m'},g\in \mathbb{Z}_2^{n-1}:x_{i,g}x_{i,\phi_i(g)}=1,\forall i,g\\
+x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_i\phi_j(g)}x_{j,\phi_j(g)}=1,\forall f_{i,g}\cap f_{j,g}\neq \varnothing\rangle
+\end{multline}
+其中$f_{i,g}\cap f_{j,g}=F_{i,g}\cap F_{j,g}\cap F_{1,g}=F_{i,\phi_i(g)}\cap F_{j,\phi_i(g)}\cap F_{1,\phi_i(g)}\neq \varnothing$.
+即形式上$\pi_1(M_F)$的生成元集$\widetilde{G}_F$和关系集$\widetilde{R}_F$都可为$\pi_1(M)$的生成元集$\widetilde{G}$和关系集$\widetilde{R}$的子集. 进一步，这种关系是映射$\widetilde{\rho}:M_F\longrightarrow M$所诱导的，即
+$\widetilde{\rho}_{*}$也把生成元单得映为生成元，把关系单得映为关系.$\hfill{} \Box$
+
+%有$\widetilde{\rho}_{*}|_{\widetilde{G}_F}=id$.  $\hfill{} \Box$
+
+对于$P$的任意一个余$k$维面$f=F_1\cap F_2\cap\cdots\cap F_k$，由归纳知$W_f$和$W$，$\pi_1(M_f)$和$\pi_1(M)$都有上面的关系. 不妨仍记$\rho:f\longrightarrow P$为面包含映射，$\rho_*:W_f\longrightarrow W$为Coxeter group之间的群同态，$\widetilde{\rho}_*:\pi_1(M_f,p_0)\longrightarrow \pi_1(M,p_0)$为基本群之间的群同态，则
+{\cor 
+%1、 $G_f$与$\rho_{*}(G_f)$，$R_f$与$\rho_{*}(R_f)$都为一一的；\\
+%2、$\widetilde{G}_f$与$\widetilde{\rho}_*(\widetilde{G}_f)$，$\widetilde{R}_f$与$\widetilde{\rho}_*(\widetilde{R}_f)$都为一一的.
+1、$\rho_*|_{G_f}$和$\rho_*|_{R_f}$都为单射.\\
+2、$\widetilde{\rho}_*|_{\widetilde{G}_f}$和$\widetilde{\rho}_*|_{\widetilde{R}_f}$都为单射.\\
+}
+
+%我们在$G_F,R_F$中加入$F$，则$W_F=\langle G_F,F:R_F,F\rangle\cong \langle FG_FF,F:R'_F,F\rangle=\langle FG_FF:R'_F\rangle\overset{\Delta}{=}W'_F$，则$\rho_*$对$W'_F$中的生成元和关系的作用就是包含到$G,R$中.在基本群中内facets对应的生成元实际上就是这种作用.
+根据上面的引理，
+ %另外将$\pi_1(M_F)$的生成元为$\widetilde{\rho}_*(\widetilde{G})$. 
+$W_F$中的文字可以用$W_P$中的生成元来表示，$\pi_1(M_F)$的文字可以用$\pi_1(M)$中的生成元来表示. 
+即有$\rho_*(\omega)=\omega, \widetilde{\rho}_*(\nu)=\nu,\forall \omega\in W_F,\nu\in\pi_1(M_F)$.
+但一般$\rho_{*}$与$\widetilde{\rho}_*$不一定是单同态. 如 
+{\exmp 取$P=I\times \triangle ^2$为三棱柱，共有$5$个facets $\{F_i\}_{i=1,2,3,4,5}$，我们给上下底面$F_1,F_2$染色$e_1$，侧面$F_3,F_4,F_5$染色为$e_2,e_3,e_1e_2e_3$，由$P$的$h$-vector 知，$\pi_1(M)$有两个生成元和两个关系，它的任意一个侧面上的small cover基本群有两个生成元，一个关系.
+
+即$\pi_1(M)=\langle x,y:x^2=yxyx^{-1}=1\rangle$,$\pi_1(M_F)=\langle x,y:yxyx^{-1}=1\rangle$\\
+\begin{diagram}
+\widetilde{\rho}_*:&\pi_1(M_F)&\rTo &\pi_1(M)\\
+\end{diagram}
+满足$\widetilde{\rho}_*(x)=x,\widetilde{\rho}_*(y)=y$，但$\widetilde{\rho}_*$非单.
+
+此时$\rho_*$也不是单的. 不妨考虑$F_5$，则$F_3\cap F_4$在$W_P$中决定的关系$(F_3F_4)^2=1$是$((F_3\cap F_5)(F_4\cap F_5))^2(\neq 1)\in W_{F_5}$在$\rho_*$下的像. 
+}
+
+%下面我们简要介绍small cover 中的Borel conjecture.
+{\defn 
+设$f$是$P$的一个余$k$维面，我们记与$f$两两相交但没有公共的交的Facets 对集为
+\begin{align}
+\mathcal{P}_f&\overset{\Delta}{=}\{(F_i,F_j):  F_i\cap f\neq \varnothing, F_j\cap f\neq \varnothing, F_i\cap F_j\neq \varnothing , F_i \cap F_j\cap f = \varnothing \}\subset R\\
+\mathcal{N}_f&\overset{\Delta}{=}\langle[F_i\cap f,F_j\cap f]: \forall (F_i,F_j)\in \mathcal{P}_f\rangle\\
+\mathcal{S}_f&\overset{\Delta}{=}\langle x_{i,g}x_{j,\phi_i(g)}x_{i,\phi_i\phi_j(g)}x_{j,\phi_j(g)}: \forall  (F_i,F_j)\in \mathcal{P}_f, g\in\mathbb{Z}_2^n \rangle
+\end{align}
+其中$[F_i\cap f,F_j\cap f]=(F_i\cap f)(F_j\cap f)(F_i\cap f)^{-1}(F_j\cap f)^{-1}=((F_i\cap f)(F_j\cap f))^2$.  
+$\mathcal{N}_f,\mathcal{S}_f$分别为$W_f,\pi_1(M_f,p_0)$中的对应$\mathcal{P}_f$中的元素生成的正规子群.
+}
+
+下面我们证明$\ker \rho_*=\mathcal{N}_f,\ker \widetilde{\rho}_*=\mathcal{S}_f$.
+
+{\defn
+我们称一个单纯复形$K$为{\em flag}的，如果$K$中两两相连的顶点集张成$K$中的一个单形. 等价地，$K$中不含维数$\geq 2$的空单形.
+
+我们称一个单多面体$P$为flag的，如果$K=\partial P$为flag的. 等价地，$P$中两两相交的面必有公共的交.}
+
+{\exmp 1、一个$m$边形为flag的，当且仅当$m>3$.
+
+2、flag 多面体的面是flag 的.
+}
+
+
+
+
+%{\thm \label{W-mon}当$P$为flag时，$\rho_{*}:W_F\longrightarrow W_P$为单的.}\\
+
+{\lem \label{W-mon} $\ker \rho_*=\mathcal{N}_f$.}\\
+{\bf 证明：}设$W'_f=W_f/\mathcal{N}_f$，设$\rho'_*:W'_f\longrightarrow W_P$为$\rho_*$诱导的映射. 它将$\mathcal{N}_f$中对应的关系映到$\mathcal{P}_f$中，故为well-defined.
+
+我们定义
+\begin{equation}\label{eq7}
+\eta_{*}:W_P\longrightarrow W'_f
+\end{equation}
+其中$\eta_{*}|_{G-\rho_*(G_f)}=1$，$\eta_{*}|_{\rho_*(G_f)}=id$.
+
+下面我们验证$\eta_{*}$定义的合理性. 我们考虑$W_P$中的关系在$\eta_{*}$下的像是否为$W_f$的单位元. 
+设$\mathcal{F}_0=\{F_1,F_2,\cdots,F_k\}$，设$P$中与$f$相交的facets集(不包含$\mathcal{F}_0$中的facets)为$\mathcal{F}_1(\rho_*(G_f))$，进一步设$\mathcal{F}_2=\mathcal{F}(F)-\mathcal{F}_1\supset \mathcal{F}_0$.  
+则$\eta_{*}$将$\mathcal{F}_2$中facets对应的生成元映为$1$.
+
+对于$W_P$的关系$F_i^2=1$，当$F_i\in \mathcal{F}_1$时，$\eta_{*}(F_i^2)=(F_i\cap f)^2=1$；当$F_i\in \mathcal{F}_2$时，$\eta_{*}(F_i^2)=1$. 
+
+$P$中的任意余二维面$g=F_{i}\cap F_{j}\neq\varnothing$决定的关系为$(F_iF_j)^2=1$.若$F_{i},F_{j}$都属于$\mathcal{F}_1$，则$\eta_{*}$将$g\subset P$所对应的关系映为$W_f$的一个关系，其中$\eta_{*}$把$\mathcal{P}_f$中的关系映到$\mathcal{N}_f$中生成元对应的关系；
+若$F_{i},F_{j}$都不属于$\mathcal{F}_1$，则对应关系在$\eta_{*}$下的像为$1$；
+若$F_{i},F_{j}$分别属于$\mathcal{F}_1,\mathcal{F}_2$，
+不妨设$F_{i}\subset \mathcal{F}_1,F_{j}\subset \mathcal{F}_2$，
+则$\eta_{*}(F_iF_jF_iF_j)=\eta_{*}(F_i)\eta_{*}(F_j)\eta_{*}(F_i)\eta_{*}(F_j)=(F_i\cap f)^2=1$. 
+
+所以对任意关系$r\in W_P,\eta_{*}(r)\equiv 1$，即$\eta_{*}$ 为well-defined的群同态.
+
+最后容易验证
+$\eta_{*}\circ\rho'_{*}=id:W_f\longrightarrow W_f$，即$\rho'_{*}$为单的.  
+
+考虑下列交换图表
+\begin{diagram}
+1&\rTo &\mathcal{N}_f&\rTo &W_f&\rTo&W_f/\mathcal{N}_f & \rTo &1\\
+&      &\dTo&       &\dTo_{=}&&\dTo^{\rho'_*}&\\
+1&\rTo &\ker \rho_* &\rTo  &W_f &\rTo^{\rho_*}   &\mathsf{im} \rho_*  &\rTo &1\\
+\end{diagram}
+
+其中$\mathsf{im} \rho_* =\mathsf{im} \rho'_*$为$W_P$的子群（未必正规），$\mathcal{N}_f$为$\ker \rho_*$的正规子群.
+%$\forall \omega\in \ker \rho_*$，则$\rho'_*(\bar{\omega})=\rho_*(\omega)=1$，由于$\rho'_*$，所以$\bar{\omega}=1$，即$\omega\in \mathcal{N}_f$. 即$\ker \rho_*=\mathcal{N}_f$.
+故$\ker \rho_*\cong\mathcal{N}_f$.$\hfill{} \Box$
+
+%{\rem由群同态基本定理，有$W_F/\ker \rho_*\cong \mathsf{im} \rho_*=\mathsf{im} \rho'_*\cong W_F/\mathcal{N}_f=W'_F$. 又$\mathcal{N}_f<\ker \rho_*$，故进一步有$W_F/\mathcal{N}_f\cong \frac{W_F/\mathcal{N}_f}{\ker \rho_*/\mathcal{N}_f}$. 
+%这里推不出$\ker \rho_*/\mathcal{N}_f$一定是平凡的，考虑$G=\langle a,b,c:a^{-1}ca=b^{-1}cb=c^2 \rangle$，$H=\langle aca^{-1}=bcb^{-1}\rangle$. [Higman,Graham, A finitely related group with an isomorphic proper factor group. J.London Math.Soc.26,(1951), 59-61]
+%这里也不能用snake lemma，也没有nine lemma的形式，snake lemma 的话要求三个竖向map的image 是正规的，这里
+%$\mathsf{im} \rho'_*$一般不为$W$的正规子群. 另外snake lemma 对交换群一定能够满足，交换群的子群都是正规的.
+
+%但这里$\rho_*$和$\rho'_*$的像是一样的这很重要，可能这能保证$W_F/\mathcal{N}_f\cong \frac{W_F/\mathcal{N}_f}{\ker \rho_*/\mathcal{N}_f}$里用到的同构都是同态定理中好的同构，所以能够保证$\ker \rho_*/\mathcal{N}_f$是平凡的.}
+
+%当单多面体$P$为flag时，若$F\cap F_i\neq \varnothing, F\cap F_j\neq \varnothing$，则$F\cap F_i\cap F_j\neq \varnothing$，即$P$中$F$附近的任意余二维面$f\subset P$对应的关系一定可以继承到$W_F$中.这保证了下面这个态射的定义合理性.
+%\begin{equation}\label{eq7}\eta_{*}:W_P\longrightarrow W_F\end{equation}
+%其中$\eta_{*}|_{G-G_F}=1$，$\eta_{*}|_{G_F}=id$. 
+
+%下面我们验证$\eta_{*}$定义的合理性. 我们考虑$W_P$中的关系在$\eta_{*}$下的像是否为$W_F$的单位元. 
+%设$P$中与$F$相交的facets集(不包含$F$)为$\mathcal{F}_1(=G_F)$，
+%与$\mathcal{F}_1$中facets相交且不包含$F$的facets集，我们记为$\mathcal{F}_2$，
+%剩余的facets我们记为$\mathcal{F}_2=\mathcal{F}(F)-\mathcal{F}_1$.  
+%则$\eta_{*}$将$\mathcal{F}_2$中facets对应的生成元映为$1$.
+
+%对于$W_P$的关系$F_i^2=1$，当$F_i\in \mathcal{F}_1$时，$\eta_{*}(F_i^2)=(F_i\cap F)^2=1$；当$F_i\in \mathcal{F}_2$时，$\eta_{*}(F_i^2)=1$. 
+
+%$P$中的任意余二维面$f=F_{i}\cap F_{j}\neq\varnothing$决定的关系为$(F_iF_j)^2=1$.若$F_{i},F_{j}$都属于$\mathcal{F}_1$，则由$P$的flag性质知$f\subset F$，
+%从而$\eta_{*}$将$f\subset P$所对应的关系映为$W_F$的一个关系；
+%若$F_{i},F_{j}$都不属于$\mathcal{F}_1$，则对应关系在$\eta_{*}$下的像为$1$；
+%若$F_{i},F_{j}$分别属于$\mathcal{F}_1,\mathcal{F}_2$，
+%不妨设$F_{i}\subset \mathcal{F}_1,F_{j}\subset \mathcal{F}_2$，
+%则$\eta_{*}(F_iF_jF_iF_j)=\eta_{*}(F_i)\eta_{*}(F_j)\eta_{*}(F_i)\eta_{*}(F_j)=(F_i\cap F)^2=1$. 
+
+%所以对任意关系$r\in W_P,\eta_{*}(r)\equiv 1$，即$\eta_{*}$ 为well-defined的群同态.
+
+%最后容易验证
+%$\eta_{*}\circ\rho_{*}=id:W_F\longrightarrow W_F$，即$\rho_{*}$为单的.  $\hfill{} \Box$
+{\cor $\rho_*$单当且仅当$\mathcal{P}_f=\varnothing$. 特别地，$P$为flag时，$\rho_*$是单的.}
+
+{\lem \label{pi-mon}$\ker \widetilde{\rho}_*=\mathcal{S}_f$}\\
+{\bf 证明：}
+设$\pi'_1(M_f,p_0)=\pi_1(M_f,p_0)/\mathcal{S}_f$，$W'_P=W_P/\langle F_1,F_2,\cdots,F_k\rangle$.
+
+考虑下面图表
+\begin{diagram}
+\pi'_1(M_f,p_0) &\rTo^{\alpha'_f} &W'_f&\rTo^{\rho'_*}&W_P\\
+\dTo^{\ddot{\widetilde{\rho}}_*}& &&&\dTo_{\beta}\\
+\pi_1(M,p_0)   &\rTo^{\alpha}&W_P &\rTo^{\beta} & W'_P
+\end{diagram}
+
+其中$\alpha'_f:\pi'_1(M_f,p_0) \longrightarrow W'_f$为$\alpha_f:\pi_1(M_f,p_0) \longrightarrow W_f$诱导的映射，$\alpha'_f$将$\mathcal{S}_f$中元素对应的关系映到$\mathcal{N}_f$中元素对应的关系，故是well-defined的. 类似$\alpha_f$的讨论（引理\ref{lem23}），我们可以验证$\mathsf{im}\, \alpha'_f$为$W'_f$的正规子群，且$\alpha'_f$为单的. 
+$\beta:W_P\longrightarrow W'_P$为商映射.
+$\ddot{\widetilde{\rho}}_*:\pi'_1(M_f,p_0)\longrightarrow \pi_1(M,p_0)$为$\widetilde{\rho}_*:\pi_1(M_f,p_0)\longrightarrow \pi_1(M,p_0)$诱导的映射，它把$\mathcal{S}_f$中元素对应的关系相应地映到$\pi_1(M,p_0)$的关系，故也为well-defined的.
+
+ 设$x_{k,g}$为$\pi_1(M_f)$的$F_k\cap f$对应的一个生成元，则$\beta\circ\alpha\circ\ddot{\widetilde{\rho}}_*(x_{k,g})=\beta\circ\alpha(x_{k,g})=\beta(\widehat{F_{k,g}})=[\widehat{F_{k,g}}]$;
+$\beta\circ\rho'_*\circ\alpha'_f(x_{k,g})=\beta\circ\rho'_{*}(\widehat{F_{k,g}\cap f})=[\widehat{F_{k,g}}]$.
+进一步，对$\forall \nu\in\pi_1(M_F), \beta\circ\alpha\circ \ddot{\widetilde{\rho}}_*(\nu)=\beta\circ\rho'_*\circ\alpha'_f(\nu)$. 即上面图表是可交换的.
+
+
+ 由于$\mathsf{im}\, \alpha'_f \cap \langle F_1,F_2,\cdots,F_k\rangle=1$（平凡群），且由引理\ref{W-mon} 知$\rho'_*$也是单的，所以$\beta\circ\rho'_*\circ\alpha'_f$为单的.
+所以$\beta\circ\alpha\circ \ddot{\widetilde{\rho}}_*$也为单的，故$\ddot{\widetilde{\rho}}_*$是单的.
+
+类似考虑下列交换图表
+\begin{diagram}
+1&\rTo &\mathcal{S}_f&\rTo &\pi_1(M_f,p_0)&\rTo&\pi'_1(M_f,p_0)& \rTo &1\\
+&      &\dTo&       &\dTo_{=}&&\dTo^{\ddot{\widetilde{\rho}}_*}&\\
+1&\rTo &\ker \widetilde{\rho}_* &\rTo  &\pi_1(M_f,p_0) &\rTo^{\widetilde{\rho}_*}   &\mathsf{im}  \widetilde{\rho}_*  &  \rTo&1\\
+\end{diagram}
+其中$\mathsf{im}  \widetilde{\rho}_* =\mathsf{im}\ddot{\widetilde{\rho}}_*$为$\pi_1(M, p_0)$的子群. 同理，由图表的交换性和snake lemma，我们得$\ker \widetilde{\rho}_*=\mathcal{S}_f$.
+
+{\cor 
+$\widetilde{\rho}_*$单当且仅当$\mathcal{P}_f=\varnothing$. 特别地，$P$为flag时，$\widetilde{\rho}_*$是单的.
+}
+
+综合上面讨论，我们有下面结论.
+{\thm
+$\ker \rho_*=\mathcal{N}_f, \ker\widetilde{\rho}_*= \mathcal{S}_f$. 所以$\widetilde{\rho}_*$单当且仅当$\rho_*$单当且仅当$\mathcal{P}_f=\varnothing$，特别地，$P$为flag时，$\widetilde{\rho}_*$和$\rho_*$都是单的.
+}
+
+
+
+
+% \newpage
+ %**********************充要条件？************
+% 在我们的证明中，实际上只用到$F$和另外两个Facets $F_i,F_j$两两相交，则它们必有公共的交这个条件. 
+ %{ \cor TFAE：
+ %\item[1]、 $F_i\cap F\neq\varnothing, F_j\cap F\neq \varnothing, F_i \cap F_j\neq\varnothing$，then $F\cap F_i \cap F_j \neq \varnothing$;
+ %\item[2]、 $\rho_* :W_F \longrightarrow W$ is a monomorphism;
+ %\item[3]、 $\widetilde{\rho}_*:\pi_1(M_F,p_0)\longrightarrow \pi_1(M,p_0)$ is a monomorphism.
+ %}\\
+ %{\bf 证明：}
+ %首先我们记$\langle [F_i\cap F,F_j\cap F]:F,F_i,F_j\text{两两相交但无公共的交}\rangle\overset{\triangle}{=}N_F$.下面我们说明$\ker \rho_*=N_F$.
+  %$\rho_*([F_i\cap F,F_j\cap F])=[F_i,F_j]=(F_iF_j)^2=1$， 即$[F_i\cap F,F_j\cap F]\in \ker \rho_*$，其中$F_i,F_j\in \mathcal{F}_1$，满足$F_i\cap F_j\neq \varnothing$.
+   %我们定义$\ddot{\rho}_*:W_F/N_F\longrightarrow W$满足$\ddot{\rho}_*(F_i\cap F)=\rho_*(F_i\cap F)=FF_iF=F_i$，显然$\ddot{\rho}_*$为well-defined 的，且引理\ref{W-mon} 中定义的$\eta_*$关于$(F_i F_j)^2$的像落在$N_F$中，故仍为well-defined的. 所以$\ddot{\rho}_*$是单的. 故$\ker \rho_*=N_F$，从而$1\Longleftrightarrow 2$.
+ 
+ %类似的我们定义$\ddot{\widetilde{\rho}}_*:\pi_1(M_F,p_0)/S_F\longrightarrow \pi_1(M,p_0)$. 其中$S_F$为$N_F$对应的关系文字生成的正规子群. $\ddot{\widetilde{\rho}}_*$显然也是well-defined的. 我们类似定理$\ref{pi-mon}$ 的讨论，可以得$\ddot{\widetilde{\rho}}_*$是单的，故$S_F =\ker \widetilde{\rho}_*$. 从而$1\Longleftrightarrow 3$.
+ %\begin{diagram}
+%\pi_1(M_F)/S_F &\rTo^{\ddot{\alpha}_F} &W_F/N_F&&\\
+%\dTo^{\ddot{\widetilde{\rho}}_*}&     &   \dTo^{\ddot{\rho}_{*}}&\rdTo^{\ddot{\rho}'_*}&\\
+%\pi_1(M)   &\rTo^{\alpha}&W_P &\rTo^{\beta} & W_P/\langle F \rangle
+%\end{diagram}
+ %$S_F$中的生成元在$\pi_1(M_F,p_0)$中是非平凡的. 如果是平凡的，则对应到$W_F$中的平凡元，不妨就是$[F_i\cap F, F_j\cap F]=1$，则$(F_i\cap F)\cap(F_j\cap F)=F_i\cap F_j\cap F\neq\varnothing$，产生矛盾.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ %\newpage
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+ 
+ {\defn 
+ 我们称一个连通闭流形$M$为aspherical的，若$\pi_k(M)=0, k\geq 2$.}
+ {\conj   设$f:M\longrightarrow N$为同伦等价，其中$M,N$为同维数闭的aspherical 流形，则$f$同伦于一个同胚映射。}
+
+{\thm [\cite{DJS1}] Let $M$ be a small cover of $P$. Then the following statements are equivalent.\\
+%
+%设$M$为单多面体$P$上的small cover，则下列条件等价.\\
+1、$M$ is aspherical.\\
+%2、单多面体$P$的边界dual to 一个flag complex. \\
+2、The boundary of $P$ is dual to a flag complex. \\
+3、The natural piecewise Euclidean metric on the dual cubical cellulation of $M$ is nonpositively curved.}
+
+{\thm [\cite{F1}] Let $f:N\longrightarrow M$ be a homotopy equivalence between closed smooth manifolds such that $M$ supports a non-positively curved Riemannian metric. Then $N$ and $M$ are stably homeomorphic; i.e.
+\begin{equation}\label{eq8}
+f\times id :N\times \mathbb{R}^{m+4}\longrightarrow M\times \mathbb{R}^{m+4}
+\end{equation}
+is homotopic to a homeomorphism where $m=\dim{M}$.}
+
+上面定理说明，当流形$M$是一个non-positively curved Riemannian 流形，且$\dim (M)\neq 3,4$，Borel conjecture 成立. 可以验证 small cover 为这样的闭流形. 
+%%%%%%%%%%%%%%%%%%%%
+{\cor 设$n(>4)$维闭流形$M,N$都为flag单多面体上的small cover ，若$\pi_1(M)\cong \pi_1(N)$，则$M$和$N$是同胚的.
+%$M$是aspherical的.且在这个范畴中，Borel conjecture 成立.
+}
+
+对于$3$维情况，在\cite{AFW} 中指出，Borel conjecture 对所有的三维流形都成立. 我们感兴趣的是 aspherical small cover $M$是不是一个Haken manifold
+%（irreducible，sufficiently large 3-manifolds 定义见\cite{W1}）.
+
+%{\defn 
+%A {Haken 3-manifold} is a compact, orientable, irreducible 3-manifold which either
+
+%\item[(1)]  has non-empty boundary which is a collection of incompressible surfaces or
+
+%\item[(2)] is closed, and admits an embedded, closed, orientable, incompressible surface.
+%}
+{\defn 
+A {Haken $3$-manifold} is a compact $3$-manifolds which are
+
+\item[(1)]  $P^2$-irreducible and
+
+\item[(2)] sufficiently large -- i.e. contain a properly embedded, 2-sided, incompressible surface.
+}
+%{\thm [\cite{F1}] 当三维可定向aspherical闭流形$M$和$N$为Haken manifold时，则Borel 猜想成立.}
+{\prop  $P^2$-irreducible M wtih $H_1(M)$ infinite is a Haken manifold.}\\
+{\bf 证明:}由Hempel \cite{He1} Lemma 6.6 知$M$包含一个 properly embedded 2-sided, nonseparating incompressible surface $S$. $\hfill{} \Box$
+%$M$ 为可定向的，$S$ 2-sided 等价于 $S$ 在$M$中的 normal bundle 是平凡的，等价于$S$是可定向的，Hatcher \cite{Ha1}.   $\hfill{} \Box$
+{\lem[*待证] 设$M$是$3$维flag多面体$P$上的一个small cover，则$H_1(M)$ 是infinite的.}\\
+{\bf 证明：}
+
+
+
+%（有问题不容易解决）由引理\ref{lemm}~知，$\rho_*|_{G_F}=id$，而$G-G_F$与$G_F$是独立的，所以$H_1(M_F)=\pi_1^{\text{ab}}(M_F)$是$H_1(M)=\pi_1^{\text{ab}}(M)$的直和项. 又$P$为flag的，所以二维闭曲面$M_F$不是$\mathbb{R}P^2$，故$\mathbb{Z}$为$H_1(M_F)$的直和项. 所以$H_1(M)$ infinite.
+%另一个想法。与F横截相交于点$p_0$的一维面记为$a$，如果$M_F$ 2-sided,则$\pi^{-1}(a)$为$H_1(M)$的 infinite 元. 如果$M_F$ 1-sided, 由flag性知$\mathbb{Z}$为$H_1(M_F)$的直和项，选择对应它的一个生成元$g$,则$g\pi^{-1}(a)$为$H_1(M)$的无限阶元.
+
+{\cor  Aspherical small covers are Haken manifolds.
+}\\
+{\bf 证明：}设$P$为三维单的flag多面体（不包含单形面），$M$为$P$上的small cover，$M$是aspherical的. 由Sphere Theorem，我们知道三维闭可定向流形是aspherical的，当且仅当它是irreducible 和$\pi_1$ infinite的. 进一步为$P^2$-irreducible，又$H_1(M)$为infinite的，故aspherical small cover $M$ 为Haken 流形. $\hfill{} \Box$
+
+{\thm 在三维small cover 范畴中，下列条件等价.
+\item[(1)]  $M$是aspherical 的,
+\item[(2)]  $M$是$P^2$-irreducible 的.
+\item[(3)]  $M$是Haken 的.
+
+进一步，此时$H_1(M)$ 是infinite的.*
+}
+%设$F$为多面体$P$的任意一个余$1$维面，$M_F$为诱导的small cover，设. 
+%从而$M$是irreducible（embedded $S^2$ bounds an embedded $3$-ball）. $\rho_{*}:\pi_1(M_F)\longrightarrow \pi_1(M)
+%88$为单同态，知$M_F$为$M$中的incompressible曲面，从而$M$为irreducible and sufficiently large的. 从而Borel 猜想成立. $\hfill{} \Box$
+%空间$M/M_F$.   $M-M_F$
+
+%对于一个small cover，它的facets对应的$n-1$维对应的面流形中可能不存在（可定向的）incompressible surface，比如正十二面体上的small cover.
+%{\exmp 设$P$为一个正十二面体，它的每个面都是一个五边形，根据$4$-color theorem，我们可以仅用$\{e_1,e_2,e_3,e_1e_2e_3\}$去染色，此时决定的small cover是可定向的，而每个五边形面决定的面子流形都是不可定向的.}
+
+可定向 aspherical 流形为irreducible的，故为prime的，故同伦等价诱导同胚. 
+尽管$\{M_F\}$中不一定存在$M$的two-sided incompressible surface（考虑正十二面体上的small cover），但$M_F$拥有许多好的性质，比如包含映射诱导的基本群同态为单的.
+特别地，我们沿着$M_F$去切$M$，这在我们构造的胞腔结构中，相当于把与$F$横截相交的那些一维闭路$\{x\}$切开，或者给面$F$一个平凡的color. 此时对应在我们上面构造的胞腔结构中，是把facets对应的闭路切开，从而这些闭路决定的生成元变为平凡元，基本群得到化简. 所以从这里我们猜测，类似于Hierachy of Waldhausen 的操作对 （高维）aspherical small cover也是有效的.
+%incompressible surface 可以推广为由facets 决定的面子流形.
+ 这对高维small cover 中的borel 猜想的证明提供一种可行的idea. 而且Davis等一些人已经在做了一些这方面的工作，比如对高维Haken 流形的推广.
+\newpage
+\begin{thebibliography}{99}
+\bibitem{AFW} M. Aschenbrenner, S. Friedl and H. Wilton, 3-manifold groups, {\em Mathematics} (2013), 1-149
+\bibitem{Buch} V.M. Buchstaber and T.E. Panov, Torus actions and their applications in topology and combinatorics, {\em University Lecture Series, 24. American Mathematical Society, Providence, RI,} (2002)
+\bibitem{D1} M.W. Davis, Groups generated by reflections and aspherical manifolds not covered by Euclidean space, {\em Ann. Math. (2)} 117 (1983), 293-325.
+\bibitem{D2} M.W. Davis, Exotic aspherical manifolds, {\em Topology of high-dimensional manifolds.}  (Trieste, 2001), 371-404.
+\bibitem{DJ1} M.W. Davis and T. Januszkiewicz, Convex polytopes, coxeter orbifolds and torus actions, {\em Duke Math. J.} 62 (1991), 417-451.
+\bibitem{DJS1} M.W. Davis, T. Januszkiewicz, and R.Scott, Nonpositive curvature of blow-ups, {\em Selecta Math.(N.S.)} 4 (1998), 491-547.
+\bibitem{DJS2} M.W. Davis, T. Januszkiewicz, and R.Scott, Fundamental groups of blow-ups, {\em Advances in mathematics.} 177 (2003), 115-179.
+\bibitem{F1} F.T. Farrell, The Borel conjecture, {\em Topology of high-dimensional manifolds.}  (Trieste, 2001), 225-298.
+\bibitem{Ha1} A. Hatcher, Spaces of Incompressible Surfaces, {\em Mathematics.}  (1999).
+\bibitem{He1} J. Hempel, 3-manifolds, {\em Annals of Mathematics studies.} 86 (1978).
+\bibitem{W1} F. Waldhausen, On irreducible 3-manifolds which are sufficiently large, {\em Ann. of Math.}  (2)87 (1968), 56-88.
+\bibitem{KMY1} S. Kuroki, M. Masuda, and L. Yu, Small covers, infra-solvmanifolds and curvature, {\em Forum mathematicum.} 27(5)(2015), 2981-3004
+\bibitem{Y1} L. Yu, Crystallographic groups with cubic normal fundamental domain, {\em RIMS Kôkyûroku Bessatsu, B39, Res. Inst. Math. Sci. (RIMS), Kyoto.} (2013), 233-244
+\end{thebibliography}
+
+\end{document}
