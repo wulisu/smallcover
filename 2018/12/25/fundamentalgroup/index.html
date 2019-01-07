@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      the fundamental group of small cover | Algebraic Topology 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Levi Wu">
+    
+    
+
+    <meta name="description" content="[joint work with my  advisor Yu Li] ###10.11 open pdf download Updated in Oct 11, 2017  ###10.16open pdf download  引理2.3给出同胚具体表达式的证明 定理2.4简化证明 定理3.4修改歧义符号，添加交换图表 定义4换为一般Haken 流形的定义 引理3.8 待证 定理3.9 添加">
+<meta name="keywords" content="paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="the fundamental group of small cover | Algebraic Topology">
+<meta property="og:url" content="http://algebraic.top/2018/12/25/fundamentalgroup/index.html">
+<meta property="og:site_name" content="Algebraic Topology">
+<meta property="og:description" content="[joint work with my  advisor Yu Li] ###10.11 open pdf download Updated in Oct 11, 2017  ###10.16open pdf download  引理2.3给出同胚具体表达式的证明 定理2.4简化证明 定理3.4修改歧义符号，添加交换图表 定义4换为一般Haken 流形的定义 引理3.8 待证 定理3.9 添加">
+<meta property="og:updated_time" content="2018-01-17T14:28:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="the fundamental group of small cover | Algebraic Topology">
+<meta name="twitter:description" content="[joint work with my  advisor Yu Li] ###10.11 open pdf download Updated in Oct 11, 2017  ###10.16open pdf download  引理2.3给出同胚具体表达式的证明 定理2.4简化证明 定理3.4修改歧义符号，添加交换图表 定义4换为一般Haken 流形的定义 引理3.8 待证 定理3.9 添加">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/smallcover/css/uno.css">
+    <link rel="stylesheet" href="/smallcover/css/highlight.css">
+    <link rel="stylesheet" href="/smallcover/css/archive.css">
+    <link rel="stylesheet" href="/smallcover/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Algebraic Topology</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          from nju
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">Index</a></li>
+              
+                
+                <li class="navigation__item"><a href="/smallcover" title="" class="">Small Cover</a></li>
+              
+                
+                <li class="navigation__item"><a href="/wulisu" title="" class="">WLS&#39;blog</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">Archive</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">the fundamental group of small cover</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-12-25" class="post-meta__date date">2018-12-25</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/smallcover/categories/small-cover/">small cover</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/smallcover/tags/paper/">paper</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <!-- toc -->
+<p>[joint work with my  advisor Yu Li]</p>
+<p>###10.11</p>
+<p><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171011.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171011.pdf">download</a></p>
+<p>Updated in Oct 11, 2017</p>
+<hr>
+<p>###10.16<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171016.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171016.pdf">download</a></p>
+<ul>
+<li>引理2.3给出同胚具体表达式的证明</li>
+<li>定理2.4简化证明</li>
+<li>定理3.4修改歧义符号，添加交换图表</li>
+<li>定义4换为一般Haken 流形的定义</li>
+<li>引理3.8 待证</li>
+<li>定理3.9 添加</li>
+<li>最后部分修改</li>
+</ul>
+<p>引理3.8的依据，与$F$横截相交于点$p_0$的一维面记为$a$，如果$M_F$ 2-sided（这里要求不可分条件）,则$\pi^{-1}(a)$为$H_1(M)$的 infinite 元. 如果$M_F$ 1-sided, 由flag性知$\mathbb{Z}$为$H_1(M_F)$的直和项，选择对应它的一个生成元$g$,则$g\pi^{-1}(a)$为$H_1(M)$的无限阶元（待证）.</p>
+<p>Updated in Oct 16, 2017</p>
+<hr>
+<p>###10.17<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171017.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171017.pdf">download</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171017.tex">tex备份</a></p>
+<p>进入第三阶段修改</p>
+<ul>
+<li>引理2.3中$\beta$的定义不合理，删掉。同胚由一一对应加局部同胚说明</li>
+<li>第三小节，结构内容大改</li>
+<li>引理3.1，把Coxeter group和Fundamental group放在一起讨论。这里后期加两个图</li>
+<li>引理3.2，微修</li>
+<li>定理3.3，这篇文章的本质</li>
+</ul>
+<p>aspherical manifold 的基本群没有有限阶子群. 如果存在子群$\mathbb{Z}_p$, 对应一个covering space也是aspherical 的，此时$\mathbb{Z}_P$自由作用在它的万有覆叠上是不可能的，有限群不能自由作用在有限维空间上。</p>
+<p>关于tex插图</p>
+<ul>
+<li>第一步，在Viso中画图，自适应大小，另存为pdf格式,(不知为何有黑边)</li>
+<li>第二步，用Acrobat打开，删掉黑边，另存为eps格式（pdf也可以）</li>
+<li>第三步，用Inkscape打开，在需要标号的位置，放大，添加小字号tex代码，保存时，勾选第三项（有tex那一项）。得到两个文件eps和eps_tex.(或pdf和pdf_tex)</li>
+<li>第四步，在tex中包含下列宏包</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;graphicx&#125;</div><div class="line">\usepackage&#123;amssymb&#125;</div><div class="line">\usepackage&#123;epstopdf&#125;</div><div class="line">\usepackage&#123;color&#125;</div></pre></td></tr></table></figure>
+<p>在需要位置插入下列代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\begin&#123;figure&#125;</div><div class="line">\centering</div><div class="line">\def\svgwidth&#123;\columnwidth&#125;</div><div class="line">\input&#123;文件名.eps_tex&#125;</div><div class="line">\end&#123;figure&#125;</div></pre></td></tr></table></figure></p>
+<p>一点问题，当前目录没问题，<code>\input</code>其他位置找不到eps文件,懒得深究.</p>
+<p>Updated in Oct 17, 2017</p>
+<hr>
+<p>###10.20<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171020.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171020.pdf">download</a></p>
+<p>第三小节的精细：</p>
+<ul>
+<li>引理3.1，明确$\rho_*$诱导的群同态有$F$的共轭作用，从基点的观点来想，这样才是正确的。但还需要准确证明。同样$\pi_1$到$W$的映射，把生成元真正映成什么也需要准确，但可以肯定的是是那种形式的某种共轭，在这种胞腔结构下也可能就是这样的。添加两个图，方便理解.</li>
+<li>定理3.3，更加准确！（有错）（不错，但不必要）<br>Updated in Oct 20, 2017</li>
+</ul>
+<hr>
+<p>###10.21<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171021.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171021.pdf">download</a></p>
+<ul>
+<li>定理3.3修改（有错）</li>
+</ul>
+<p>Updated in Oct 21, 2017</p>
+<hr>
+<p>###10.24<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171024.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171024.pdf">download</a></p>
+<ul>
+<li>引理2.3，把注中内容，整合到证明当中，给$\ker\psi$一个新的不混淆的记号$\hat{F_k}$</li>
+<li>第三节标题更改</li>
+<li>引理3.1图更改</li>
+<li>定理3.3，图标离交换性还差一个商群，更改，还需仔细验证.</li>
+</ul>
+<p>Updated in Oct 24, 2017</p>
+<hr>
+<p>###10.30<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171030.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171030.pdf">download</a></p>
+<ul>
+<li>语句层面的修改</li>
+</ul>
+<p>Updated in Oct 30, 2017</p>
+<hr>
+<p>###10.31<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171031.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171031.pdf">download</a></p>
+<ul>
+<li>\alpha的讨论，well-defined 和单性</li>
+</ul>
+<p>Updated in Oct 31, 2017</p>
+<hr>
+<p>###11.02<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171102.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171102.pdf">download</a></p>
+<ul>
+<li>引理2.3 细节补充完成，</li>
+<li>不知正确否？</li>
+<li>定稿》》》》》》》</li>
+</ul>
+<p>Updated in nov 18, 2017</p>
+<hr>
+<p>###11.02<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171118.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171118.pdf">download</a></p>
+<ul>
+<li>第三节大改</li>
+</ul>
+<p>Updated in nov 18, 2017</p>
+<hr>
+<p>###11.22<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20171122.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171122.pdf">download</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20171122.tex">download</a></p>
+<ul>
+<li>阶段性备份</li>
+</ul>
+<p>Updated in nov 22, 2017</p>
+<hr>
+<p>###1.11<br>正式论文链接：<br><a href="https://arxiv.org/abs/1712.00698" target="_blank" rel="external">arXiv:1712.00698</a></p>
+<p>Updated in Jan 11, 2018</p>
+<hr>
+<p>###01.17<br><a href="/smallcover/generic/web/viewer.html?file=%2Fsmallcover/pdf%2F20180127.pdf">open pdf</a></p>
+<p><a href="http://algebraic.top/smallcover/pdf/20180127.pdf">download</a></p>
+<ul>
+<li>阶段性备份</li>
+</ul>
+<p>Updated in Jan 17, 2018</p>
+<hr>
+<h2 id=""><a href="#" class="headerlink" title=""></a><!-- toc --></h2>
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/smallcover/js/jquery.min.js"></script>
+    <script src="/smallcover/js/main.js"></script>
+    <script src="/smallcover/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/smallcover/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
